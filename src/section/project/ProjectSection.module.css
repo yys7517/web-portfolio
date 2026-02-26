@@ -8,7 +8,7 @@
   margin: 0;
   margin-top: 0;
   text-align: center;
-  font-size: 52px;
+  font-size: 64px;
   font-weight: 800;
   letter-spacing: -0.02em;
 }
@@ -75,7 +75,7 @@
 
 .projectInfo h3 {
   margin: 0;
-  font-size: 42px;
+  font-size: 24px;
   line-height: 1.2;
   font-weight: 800;
   color: #f3f5ef;
@@ -84,7 +84,7 @@
 .projectInfo p {
   margin: 14px 0 0;
   color: rgba(243, 245, 239, 0.58);
-  font-size: 28px;
+  font-size: 16px;
   line-height: 1.4;
 }
 
@@ -92,7 +92,7 @@
   margin-top: 18px;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
 }
 
 .tag {
@@ -100,7 +100,7 @@
   border-radius: 999px;
   background: #eef2f7;
   color: #2f4568;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 1;
 }

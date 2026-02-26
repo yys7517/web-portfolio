@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import type { Category } from "../../type/category";
 import styles from "./ProjectSection.module.css";
+import { supabase } from "../../api/supabaseClient";
 
-type Project = {
+type ProjectCard = {
   id: number;
   title: string;
   description: string;
@@ -22,28 +23,33 @@ const categories: Category[] = [
   "DevOps",
 ];
 
-const projects: Project[] = [
-  {
-    id: 1,
-    title: "My First Project",
-    description: "This is a sample project description.",
-    category: "Frontend" as Category,
-    tags: ["React", "TypeScript"],
-    image: "/images/project-1.png",
-    demoUrl: "https://example.com",
-    githubUrl: "https://github.com/your-id/repo1",
-  },
-  {
-    id: 2,
-    title: "Mobile App",
-    description: "Android/iOS 앱 프로젝트",
-    category: "Mobile" as Category,
-    tags: ["React Native", "Firebase"],
-    image: "/images/project-2.png",
-    demoUrl: "https://example.com",
-    githubUrl: "https://github.com/your-id/repo2",
-  },
-];
+const { data, error } = await supabase.from("projects").select(`
+    id,
+    title,
+    overview,
+    category_name,
+    img_url,
+    demo_url,
+    github_url,
+    project_skills:project-skills (
+      skill:skills (
+        skill_name
+      )
+    )
+  `);
+
+if (error) throw error;
+
+const projects: ProjectCard[] = (data ?? []).map((row: any) => ({
+  id: row.id,
+  title: row.title,
+  description: row.overview,
+  category: row.category_name as Category,
+  image: row.img_url ?? "",
+  demoUrl: row.demo_url ?? "",
+  githubUrl: row.github_url ?? "",
+  tags: (row.project_skills ?? []).map((skill: any) => skill.skill_name),
+}));
 
 const ProjectSection = () => {
   const [selectedCategory, setSelectedCategory] = useState<Category>("All"); // 선택된 카테고리
