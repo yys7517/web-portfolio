@@ -1,0 +1,68 @@
+.skillSection {
+  background: #5a9ad6;
+  padding: 80px 24px;
+}
+
+.title {
+  color: #fff;
+  text-align: center;
+  font-size: 64px;
+  margin: 0 0 40px;
+}
+
+.card {
+  max-width: 1300px;
+  margin: 0 auto;
+  background: #dbe8ef;
+  border-radius: 28px;
+  padding: 36px 42px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+}
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+  padding: 18px 0;
+}
+
+/* 카테고리 이름 */
+.row span {
+  text-align: left;
+  font-size: 24px;
+  margin-left: 16px;
+}
+
+.category {
+  width: 220px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 20px;
+}
+
+.icon {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+/* 스킬 태그들 */
+.tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.tag {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 16px;
+
+  /* 배경과 글씨색 */
+  background: #3b82f6;
+  color: #fff;
+}
