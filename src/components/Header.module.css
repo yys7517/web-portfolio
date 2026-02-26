@@ -4,6 +4,11 @@
   align-items: center;
   padding: 30px 30px;
   background-color: #273551;
+  position: fixed; /* 또는 sticky */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
 .logo {
