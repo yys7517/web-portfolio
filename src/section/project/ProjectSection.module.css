@@ -59,6 +59,18 @@
   overflow: hidden;
   background: #2a3f67;
   border: 1px solid rgba(255, 255, 255, 0.09);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+  will-change: transform;
+  cursor: pointer;
+}
+
+.projectCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 28px rgba(7, 12, 24, 0.35);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .projectImg {
