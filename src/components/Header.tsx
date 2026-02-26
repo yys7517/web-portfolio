@@ -8,16 +8,36 @@ const Header = () => {
       <nav className={styles.nav}>
         <ul>
           <li>
-            <Link to={{ pathname: "/", hash: "#intro" }}>Home</Link>
+            <Link
+              className={styles.link}
+              to={{ pathname: "/", hash: "#intro" }}
+            >
+              Home
+            </Link>
           </li>
           <li>
-            <Link to={{ pathname: "/", hash: "#skills" }}>Skills</Link>
+            <Link
+              className={styles.link}
+              to={{ pathname: "/", hash: "#skills" }}
+            >
+              Skills
+            </Link>
           </li>
           <li>
-            <Link to={{ pathname: "/", hash: "#project" }}>Projects</Link>
+            <Link
+              className={styles.link}
+              to={{ pathname: "/", hash: "#project" }}
+            >
+              Projects
+            </Link>
           </li>
           <li>
-            <Link to={{ pathname: "/", hash: "#career" }}>Careers</Link>
+            <Link
+              className={styles.link}
+              to={{ pathname: "/", hash: "#career" }}
+            >
+              Careers
+            </Link>
           </li>
         </ul>
       </nav>

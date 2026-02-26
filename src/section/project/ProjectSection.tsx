@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import type { Category } from "../../type/category";
 import styles from "./ProjectSection.module.css";
 import { supabase } from "../../api/supabaseClient";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 type ProjectCard = {
   id: number;

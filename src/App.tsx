@@ -4,7 +4,7 @@ import {
   Route,
   Routes,
   useLocation,
-} from "react-router";
+} from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
 import ProjectDetailPage from "./pages/ProjectDetailPage";
