@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import type { Category } from "../../type/category";
 import styles from "./ProjectSection.module.css";
 import { supabase } from "../../api/supabaseClient";
+import { useNavigate } from "react-router";
 
 type ProjectCard = {
   id: number;
+  slug: string;
   title: string;
   description: string;
   category: Category;
@@ -24,34 +26,52 @@ const categories: Category[] = [
 ];
 
 const { data, error } = await supabase.from("projects").select(`
-    id,
-    title,
-    overview,
-    category_name,
-    img_url,
-    demo_url,
-    github_url,
-    project_skills:project-skills (
-      skill:skills (
-        skill_name
-      )
+  id,
+  slug,
+  title,
+  overview,
+  category_name,
+  img_url,
+  demo_url,
+  github_url,
+  project_skills (
+    skills (
+      skill_name
     )
-  `);
+  )
+`);
+// FK에 연결된 project_id 값을 통해 project_skills를 자동으로 조인 + skill_id의 값을 통해
+// skills 테이블을 조인, skill_name을 가져옴.
 
 if (error) throw error;
 
-const projects: ProjectCard[] = (data ?? []).map((row: any) => ({
-  id: row.id,
-  title: row.title,
-  description: row.overview,
-  category: row.category_name as Category,
-  image: row.img_url ?? "",
-  demoUrl: row.demo_url ?? "",
-  githubUrl: row.github_url ?? "",
-  tags: (row.project_skills ?? []).map((skill: any) => skill.skill_name),
-}));
+type ProjectSkillRow = {
+  row: { skill_name: string } | null;
+};
+
+const projects: ProjectCard[] = (data ?? []).map((row: any) => {
+  const tags =
+    (row.project_skills as ProjectSkillRow[] | undefined)
+      ?.map(({ row }) => row?.skill_name)
+      .filter((name): name is string => Boolean(name)) ?? [];
+
+  return {
+    id: row.id,
+    slug: row.slug,
+    title: row.title,
+    description: row.overview,
+    category: row.category_name as Category,
+    image: row.img_url ?? "",
+    demoUrl: row.demo_url ?? "",
+    githubUrl: row.github_url ?? "",
+    tags,
+  };
+});
 
 const ProjectSection = () => {
+  const navigate = useNavigate();
+
+  // 선택된 카테고리 상태
   const [selectedCategory, setSelectedCategory] = useState<Category>("All"); // 선택된 카테고리
 
   // 선택된 카테고리에 해당하는 프로젝트로 필터링
@@ -91,7 +111,11 @@ const ProjectSection = () => {
       {/* 프로젝트 목록 */}
       <div className={styles.projectList}>
         {filteredProjects.map((project) => (
-          <div key={project.id} className={styles.projectCard}>
+          <article
+            key={project.id}
+            className={styles.projectCard}
+            onClick={() => navigate(`/projects/${project.slug}`)} // id 대신 project slug값을 통해 이동
+          >
             <img
               src={project.image}
               alt={project.title}
@@ -120,7 +144,7 @@ const ProjectSection = () => {
                 </a>
               </div>
             </div>
-          </div>
+          </article>
         ))}
       </div>
     </section>

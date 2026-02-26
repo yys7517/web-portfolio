@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import styles from "./Header.module.css";
 
 const Header = () => {
@@ -7,16 +8,16 @@ const Header = () => {
       <nav className={styles.nav}>
         <ul>
           <li>
-            <a href="#intro">Home</a>
+            <Link to={{ pathname: "/", hash: "#intro" }}>Home</Link>
           </li>
           <li>
-            <a href="#skills">Skills</a>
+            <Link to={{ pathname: "/", hash: "#skills" }}>Skills</Link>
           </li>
           <li>
-            <a href="#project">Projects</a>
+            <Link to={{ pathname: "/", hash: "#project" }}>Projects</Link>
           </li>
           <li>
-            <a href="#career">Careers</a>
+            <Link to={{ pathname: "/", hash: "#career" }}>Careers</Link>
           </li>
         </ul>
       </nav>
