@@ -2,9 +2,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 30px 30px;
-  background-color: #273551;
-  position: fixed; /* 또는 sticky */
+  padding: 30px 80px;
+  background-color: #223553;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -31,8 +31,7 @@
 }
 
 .nav a {
-  font-size: 16px;
-  font-weight: 400;
+  font-size: 20px;
   text-decoration: none;
   color: rgba(255, 255, 255, 0.5);
 }

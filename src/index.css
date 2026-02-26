@@ -89,6 +89,8 @@ video {
   border: 0;
   font-size: 100%;
   font: inherit;
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px; /* 앵커 이동 전역 오프셋 */
   vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -126,4 +128,8 @@ q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+
+#project {
+  scroll-padding-top: 20px;
 }
