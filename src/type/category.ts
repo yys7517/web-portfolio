@@ -1,0 +1,1 @@
+export type Category = "All" | "Frontend" | "Backend" | "Fullstack" | "Mobile" | "DevOps";

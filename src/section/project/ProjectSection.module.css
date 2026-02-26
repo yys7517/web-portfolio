@@ -1,0 +1,138 @@
+.projectSection {
+  background: #192f57;
+  padding: 64px 24px 96px;
+  color: #f3f5ef;
+}
+
+.title {
+  margin: 0;
+  margin-top: 0;
+  text-align: center;
+  font-size: 52px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.filterRow {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.filterButton {
+  height: 44px;
+  padding: 0 24px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(243, 245, 239, 0.72);
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.filterButton:hover {
+  background: rgba(255, 255, 255, 0.09);
+  color: #f3f5ef;
+}
+
+.active {
+  background: #ce845f;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+.projectList {
+  max-width: 1240px;
+  margin: 44px auto 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.projectCard {
+  border-radius: 18px;
+  overflow: hidden;
+  background: #2a3f67;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.projectImg {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  display: block;
+  background: #d8d8dc;
+}
+
+.projectInfo {
+  padding: 24px 22px 22px;
+}
+
+.projectInfo h3 {
+  margin: 0;
+  font-size: 42px;
+  line-height: 1.2;
+  font-weight: 800;
+  color: #f3f5ef;
+}
+
+.projectInfo p {
+  margin: 14px 0 0;
+  color: rgba(243, 245, 239, 0.58);
+  font-size: 28px;
+  line-height: 1.4;
+}
+
+.tags {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag {
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: #eef2f7;
+  color: #2f4568;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.links {
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.links a {
+  height: 52px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.links a:first-child {
+  background: #ce845f;
+  color: #fff;
+}
+
+.links a:last-child {
+  background: #ecebd8;
+  color: #2b3853;
+}
+
+.links a:hover {
+  filter: brightness(0.96);
+}
