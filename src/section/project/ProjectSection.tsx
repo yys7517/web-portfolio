@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import type { MouseEvent } from "react";
 import type { Category } from "../../type/category";
 import styles from "./ProjectSection.module.css";
 import { supabase } from "../../api/supabaseClient";
@@ -46,13 +47,13 @@ const { data, error } = await supabase.from("projects").select(`
 if (error) throw error;
 
 type ProjectSkillRow = {
-  row: { skill_name: string } | null;
+  skills: { skill_name: string } | null;
 };
 
 const projects: ProjectCard[] = (data ?? []).map((row: any) => {
   const tags =
     (row.project_skills as ProjectSkillRow[] | undefined)
-      ?.map(({ row }) => row?.skill_name)
+      ?.map((ps) => ps.skills?.skill_name)
       .filter((name): name is string => Boolean(name)) ?? [];
 
   return {
@@ -70,6 +71,15 @@ const projects: ProjectCard[] = (data ?? []).map((row: any) => {
 
 const ProjectSection = () => {
   const navigate = useNavigate();
+
+  // 프로젝트 카드 클릭과, 링크 버튼 클릭을 구분하기 위해
+  const handleCardClick = (e: MouseEvent<HTMLElement>, slug: string) => {
+    const target = e.target as HTMLElement;
+    if (target.closest("a, button")) {
+      return;
+    }
+    navigate(`/projects/${slug}`);
+  };
 
   // 선택된 카테고리 상태
   const [selectedCategory, setSelectedCategory] = useState<Category>("All"); // 선택된 카테고리
@@ -114,7 +124,7 @@ const ProjectSection = () => {
           <article
             key={project.id}
             className={styles.projectCard}
-            onClick={() => navigate(`/projects/${project.slug}`)} // id 대신 project slug값을 통해 이동
+            onClick={(e) => handleCardClick(e, project.slug)}
           >
             <img
               src={project.image}
@@ -135,8 +145,13 @@ const ProjectSection = () => {
               </div>
 
               {/* 링크 연결 */}
-              <div className={styles.links}>
-                <a href={project.demoUrl} target="_blank" rel="noreferrer">
+              <div className={styles.links} onClick={(e) => e.stopPropagation()}>
+                <a
+                  href={project.demoUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   <img
                     src="/icons/ic_demo.svg"
                     alt=""
@@ -144,7 +159,12 @@ const ProjectSection = () => {
                   />
                   <span>Live Demo</span>
                 </a>
-                <a href={project.githubUrl} target="_blank" rel="noreferrer">
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   <img
                     src="/icons/ic_github.svg"
                     alt=""
