@@ -1,0 +1,355 @@
+.projectDetailPage {
+  background: #f5f5f5;
+  min-height: 100vh;
+  padding: 100px 28px 72px;
+  scroll-behavior: auto;
+}
+
+.container {
+  max-width: 1300px;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 88px;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 32px;
+  margin-bottom: 28px;
+}
+
+.titleRow h1 {
+  margin: 0;
+  color: #111;
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.titleActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.titleActions a,
+.backButton {
+  height: 40px;
+  border-radius: 12px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #c9d4e5;
+  background: #fff;
+  color: #1f3255;
+  line-height: 1;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  gap: 8px;
+}
+
+.topSection {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 22px;
+}
+
+.summaryCard {
+  background: #e9e9ec;
+  border-radius: 18px;
+  padding: 22px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.summaryGroup h3 {
+  margin: 0;
+  color: #57526b;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.summaryGroup p {
+  margin: 8px 0 0;
+  color: #000;
+  font-size: 18px;
+  line-height: 1.4;
+  word-break: keep-all;
+}
+
+.overviewPanel {
+  display: flex;
+  flex-direction: column;
+}
+
+.overviewPanel h2 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 800;
+  color: #101010;
+}
+
+.description {
+  margin: 16px 0 0;
+  color: #222;
+  font-size: 18px;
+  line-height: 1.6;
+  word-break: keep-all;
+}
+
+.reasonGrid {
+  margin-top: 26px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.reasonCard {
+  background: #d4dfec;
+  border-radius: 14px;
+  padding: 16px 16px;
+}
+
+.reasonSkill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #3f73d8;
+  color: #fff;
+  padding: 8px 32px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.reasonCard p {
+  margin: 12px 0 0;
+  color: black;
+  font-size: 18px;
+  line-height: 1.45;
+  word-break: keep-all;
+}
+
+.tags {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #253a5d;
+  border: 1px solid #d6dce8;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.markdownSection {
+  margin-top: 42px;
+  border-radius: 18px;
+  background: #eceff4;
+  padding: 26px;
+}
+
+.markdownSection h1 {
+  margin: 0 0 14px;
+  color: #111;
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.markdownSection h2 {
+  margin: 26px 0 12px;
+  color: #111;
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.markdownSection h3 {
+  margin: 22px 0 10px;
+  color: #111;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.markdownSection h4 {
+  margin: 18px 0 10px;
+  color: #111;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.markdownSection p,
+.markdownSection li,
+.markdownSection blockquote {
+  color: #252525;
+  font-size: 20px;
+  line-height: 1.6;
+  word-break: keep-all;
+}
+
+.markdownSection ul {
+  list-style: disc;
+  padding-left: 28px;
+  margin: 12px 0;
+}
+
+.markdownSection ol {
+  list-style: decimal;
+  padding-left: 28px;
+  margin: 12px 0;
+}
+
+.markdownSection a {
+  color: #136fd6;
+}
+
+.markdownSection strong {
+  font-weight: 800;
+}
+
+.markdownSection pre {
+  overflow-x: auto;
+  border-radius: 10px;
+  background: #1f2937;
+  color: #f9fafb;
+  padding: 12px;
+}
+
+.markdownSection code {
+  border-radius: 6px;
+  background: #dde2ec;
+  padding: 1px 6px;
+  font-size: 17px;
+}
+
+.markdownSection pre code {
+  background: transparent;
+  padding: 0;
+}
+
+.markdownSection img {
+  max-width: 100%;
+  border-radius: 12px;
+}
+
+.errorContainer {
+  min-height: calc(100vh - 120px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.errorContainer h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.errorContainer button {
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 10px;
+  border: 1px solid #c9d4e5;
+  background: #fff;
+  color: #1f3255;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .projectDetailPage {
+    padding-top: 132px;
+  }
+
+  .titleRow h1 {
+    font-size: 40px;
+  }
+
+  .topSection {
+    grid-template-columns: 1fr;
+  }
+
+  .reasonGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .projectDetailPage {
+    padding: 116px 14px 52px;
+  }
+
+  .titleRow {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .titleActions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .titleActions a,
+  .backButton {
+    height: 36px;
+    font-size: 14px;
+  }
+
+  .titleRow h1 {
+    font-size: 32px;
+  }
+
+  .overviewPanel h2 {
+    font-size: 32px;
+  }
+
+  .description {
+    font-size: 18px;
+  }
+
+  .summaryGroup h3 {
+    font-size: 24px;
+  }
+
+  .summaryGroup p {
+    font-size: 18px;
+  }
+
+  .reasonSkill {
+    font-size: 14px;
+    min-width: 80px;
+    height: 30px;
+  }
+
+  .reasonCard p {
+    font-size: 16px;
+  }
+
+  .markdownSection {
+    margin-top: 26px;
+    padding: 18px 14px;
+  }
+
+  .markdownSection p,
+  .markdownSection li,
+  .markdownSection blockquote {
+    font-size: 16px;
+  }
+}
