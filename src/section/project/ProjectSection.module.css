@@ -1,6 +1,6 @@
 .projectSection {
-  background: #192f57;
-  padding: 64px 24px 96px;
+  background: #f5f5f5;
+  padding: 64px 48px 96px;
   color: #f3f5ef;
 }
 
@@ -11,10 +11,11 @@
   font-size: 64px;
   font-weight: 800;
   letter-spacing: -0.02em;
+  color: #1f3255; /* 진한 네이비 */
 }
 
 .filterRow {
-  margin-top: 30px;
+  margin-top: 32px;
   display: flex;
   justify-content: center;
   gap: 14px;
@@ -25,39 +26,47 @@
   height: 44px;
   padding: 0 24px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.05);
-  color: rgba(243, 245, 239, 0.72);
+  border: 1px solid #c9d4e5; /* 연한 테두리 */
+  background: #eef3fb; /* 밝은 블루그레이 */
+  color: #324a70; /* 진한 텍스트 */
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   transition: 0.2s ease;
 }
 
 .filterButton:hover {
-  background: rgba(255, 255, 255, 0.09);
-  color: #f3f5ef;
+  background: #dfe8f7;
+  border-color: #aebed8;
+  color: #1f3255;
 }
 
 .active {
-  background: #ce845f;
+  background: #d77f5d; /* 포인트 컬러 */
   color: #fff;
-  border-color: rgba(255, 255, 255, 0.55);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  border-color: #d77f5d;
+  box-shadow: 0 4px 12px rgba(46, 62, 92, 0.2);
 }
 
 .projectList {
   max-width: 1240px;
   margin: 44px auto 0;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(320px, 1fr));
   gap: 28px;
 }
 
+/* 버튼 영역을 카드 하단에 고정하려면 projectInfo를 세로 
+flex로 바꾸고 links에 margin-top: auto를 주면 됩니다. */
+
 .projectCard {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   border-radius: 18px;
   overflow: hidden;
-  background: #2a3f67;
+  background: white;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
   border: 1px solid rgba(255, 255, 255, 0.09);
   transition:
     transform 180ms ease,
@@ -67,10 +76,12 @@
   cursor: pointer;
 }
 
-.projectCard:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 14px 28px rgba(7, 12, 24, 0.35);
-  border-color: rgba(255, 255, 255, 0.2);
+@media (hover: hover) and (pointer: fine) {
+  .projectCard:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 28px rgba(7, 12, 24, 0.35);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
 }
 
 .projectImg {
@@ -83,6 +94,9 @@
 
 .projectInfo {
   padding: 24px 22px 22px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }
 
 .projectInfo h3 {
@@ -90,12 +104,12 @@
   font-size: 24px;
   line-height: 1.2;
   font-weight: 800;
-  color: #f3f5ef;
+  color: black;
 }
 
 .projectInfo p {
   margin: 14px 0 0;
-  color: rgba(243, 245, 239, 0.58);
+  color: black;
   font-size: 16px;
   line-height: 1.4;
 }
@@ -108,17 +122,18 @@
 }
 
 .tag {
-  padding: 7px 14px;
+  padding: 8px 16px;
   border-radius: 999px;
-  background: #eef2f7;
-  color: #2f4568;
+  background: #e2e2e3;
+  color: #122c4f;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1;
 }
 
 .links {
-  margin-top: 32px;
+  margin-top: auto;
+  padding-top: 32px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
@@ -126,14 +141,14 @@
 
 .links a {
   height: 52px;
-  border-radius: 10px;
+  border-radius: 12px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
   text-decoration: none;
-  font-size: 16px;
-  font-weight: 400;
+  font-size: 20px;
+  font-weight: 500;
   line-height: 1;
 }
 
@@ -149,6 +164,7 @@
 
 .links a:last-child {
   background: #fbf9e3;
+  border: #122c4f 1px solid;
 }
 
 .links a:last-child span {
@@ -158,18 +174,124 @@
 }
 
 .linkIcon {
-  width: 24px;
-  height: 24px;
-  display: block;
+  width: 28px;
+  height: 28px;
   object-fit: contain;
-  flex-shrink: 0;
 }
 
 .links a span {
-  display: block;
-  line-height: 1;
+  margin-left: -4px;
 }
 
 .links a:hover {
   filter: brightness(0.8);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1100px) {
+  .projectSection {
+    padding: 56px 28px 80px;
+  }
+
+  .title {
+    font-size: 52px;
+  }
+
+  .projectList {
+    max-width: 760px;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .projectInfo h3 {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .projectSection {
+    padding: 44px 16px 64px;
+  }
+
+  .title {
+    font-size: 40px;
+  }
+
+  .filterRow {
+    margin-top: 20px;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .filterButton {
+    flex: 0 0 auto;
+    height: 40px;
+    padding: 0 18px;
+    font-size: 16px;
+  }
+
+  .projectList {
+    margin-top: 28px;
+    gap: 20px;
+  }
+
+  .projectInfo {
+    padding: 18px 16px 16px;
+  }
+
+  .projectInfo h3 {
+    font-size: 24px;
+  }
+
+  .projectInfo p {
+    font-size: 15px;
+  }
+
+  .tags {
+    margin-top: 14px;
+    min-height: auto;
+    gap: 8px;
+  }
+
+  .tag {
+    padding: 7px 12px;
+    font-size: 14px;
+  }
+
+  .links {
+    padding-top: 20px;
+    gap: 8px;
+  }
+
+  .links a {
+    height: 46px;
+    font-size: 16px;
+    gap: 8px;
+  }
+
+  .linkIcon {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+@media (max-width: 420px) {
+  .projectSection {
+    padding: 36px 12px 56px;
+  }
+
+  .title {
+    font-size: 34px;
+  }
+
+  .projectCard {
+    border-radius: 14px;
+  }
+
+  .projectInfo {
+    padding: 16px 12px 14px;
+  }
 }
