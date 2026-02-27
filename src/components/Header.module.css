@@ -32,7 +32,24 @@
 
 .link {
   color: #fff;
+  background: none;
   text-decoration: none;
   font-weight: 700;
   font-size: 20px;
+  line-height: 1;
+}
+
+.link:hover {
+  cursor: pointer;
+  transition: 0.2s ease;
+  /* 흰색 알파값 0.5 */
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.linkButton {
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  appearance: none;
 }

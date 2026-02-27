@@ -1,10 +1,24 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Header.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "../store/store";
+import { logout } from "../store/authSlice";
+import { supabase } from "../api/supabaseClient";
 
 const Header = () => {
+  const isLoggedin = useSelector((state: RootState) => state.auth.isLoggedIn);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    supabase.auth.signOut();
+    dispatch(logout());
+    navigate("/");
+  };
+
   return (
     <header className={styles.header}>
-      <div className={styles.logo}>윤영선의 포트폴리오</div>
+      <div className={styles.logo}>Portfolio</div>
       <nav className={styles.nav}>
         <ul>
           <li>
@@ -38,6 +52,22 @@ const Header = () => {
             >
               Careers
             </Link>
+          </li>
+
+          <li>
+            {isLoggedin ? (
+              <button
+                type="button"
+                className={`${styles.link} ${styles.linkButton}`}
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
+            ) : (
+              <Link className={styles.link} to={{ pathname: "/login" }}>
+                Login
+              </Link>
+            )}
           </li>
         </ul>
       </nav>

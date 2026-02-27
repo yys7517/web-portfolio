@@ -7,23 +7,27 @@ import {
 } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
-import ProjectDetailPage from "./pages/ProjectDetailPage";
+import ProjectDetailPage from "./pages/projectdetail/ProjectDetailPage";
 import HomePage from "./pages/HomePage";
 import { useEffect } from "react";
+import Login from "./pages/login/Login";
 
 // 공통 껍데기 컴포넌트
 function Layout() {
   const location = useLocation(); // 현재 URL 정보를 주는 hook
 
   useEffect(() => {
-    if (location.pathname !== "/") return; // 홈 페이지가 아니면 동작 x
-    if (!location.hash) return; // 해시 값이 없다면 동작 x
+    // 홈페이지와 내비게이션 해시 값에서는 동작
+    if (location.pathname === "/" && location.hash) {
+      const id = location.hash.replace("#", "");
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
 
-    const id = location.hash.replace("#", ""); // #skills -> skills
-    // id: skills인 요소를 찾아 스크롤
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, [location]); // URL이 변경될 때마다 함수 동작
+    // 그 외 라우트 이동(예: /projects/:slug)은 항상 맨 위
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [location.pathname, location.hash]);
 
   return (
     <>
@@ -40,6 +44,7 @@ export default function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/projects/:slug" element={<ProjectDetailPage />} />
         </Route>
       </Routes>
