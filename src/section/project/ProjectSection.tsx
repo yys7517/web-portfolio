@@ -20,7 +20,7 @@ type ProjectSkillRow = {
   skills: { skill_name: string } | null;
 };
 
-const ProjectSection = async () => {
+const ProjectSection = () => {
   const navigate = useNavigate();
   const [projects, setProjects] = useState<Project[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<Category>("All"); // 선택된 카테고리
