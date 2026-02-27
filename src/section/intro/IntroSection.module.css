@@ -2,11 +2,12 @@
   width: 100%;
   background: #223553;
   color: #fff;
+  min-height: 100vh;
 }
 
 .intro {
   position: relative;
-  height: 650px;
+  height: 60vh;
   overflow: auto;
 }
 
@@ -50,6 +51,7 @@
 }
 
 .profileCard {
+  min-height: 40vh;
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px;
@@ -59,8 +61,8 @@
 }
 
 .avatar {
-  width: 300px;
-  height: 300px;
+  width: 350px;
+  height: 350px;
   border-radius: 50%;
   object-fit: cover;
   flex-shrink: 0;

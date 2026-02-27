@@ -4,18 +4,7 @@ import type { Category } from "../../type/category";
 import styles from "./ProjectSection.module.css";
 import { supabase } from "../../api/supabaseClient";
 import { useNavigate } from "react-router-dom";
-
-type ProjectCard = {
-  id: number;
-  slug: string;
-  title: string;
-  description: string;
-  category: Category;
-  tags: string[];
-  image: string;
-  demoUrl: string;
-  githubUrl: string;
-};
+import type { Project } from "../../type/project";
 
 const categories: Category[] = [
   "All",
@@ -26,67 +15,84 @@ const categories: Category[] = [
   "DevOps",
 ];
 
-const { data, error } = await supabase.from("projects").select(`
-  id,
-  slug,
-  title,
-  overview,
-  category_name,
-  img_url,
-  demo_url,
-  github_url,
-  project_skills (
-    skills (
-      skill_name
-    )
-  )
-`);
-// FK에 연결된 project_id 값을 통해 project_skills를 자동으로 조인 + skill_id의 값을 통해
-// skills 테이블을 조인, skill_name을 가져옴.
-
-if (error) throw error;
-
 type ProjectSkillRow = {
+  skill_reason: string | null;
   skills: { skill_name: string } | null;
 };
 
-const projects: ProjectCard[] = (data ?? []).map((row: any) => {
-  const tags =
-    (row.project_skills as ProjectSkillRow[] | undefined)
-      ?.map((ps) => ps.skills?.skill_name)
-      .filter((name): name is string => Boolean(name)) ?? [];
-
-  return {
-    id: row.id,
-    slug: row.slug,
-    title: row.title,
-    description: row.overview,
-    category: row.category_name as Category,
-    image: row.img_url ?? "",
-    demoUrl: row.demo_url ?? "",
-    githubUrl: row.github_url ?? "",
-    tags,
-  };
-});
-
-const ProjectSection = () => {
+const ProjectSection = async () => {
   const navigate = useNavigate();
-
-  // 프로젝트 카드 클릭과, 링크 버튼 클릭을 구분하기 위해
-  const handleCardClick = (e: MouseEvent<HTMLElement>, slug: string) => {
-    const target = e.target as HTMLElement;
-    if (target.closest("a, button")) {
-      return;
-    }
-    navigate(`/projects/${slug}`);
-  };
-
-  // 선택된 카테고리 상태
+  const [projects, setProjects] = useState<Project[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<Category>("All"); // 선택된 카테고리
+  const [filteredProjects, setFilteredProjects] = useState(projects); // 선택된 카테고리에 해당하는 프로젝트로 필터링
 
-  // 선택된 카테고리에 해당하는 프로젝트로 필터링
-  const [filteredProjects, setFilteredProjects] = useState(projects);
+  // 최초 Supabase 프로젝트 init 함수
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const { data, error } = await supabase.from("projects").select(`
+        id,
+        slug,
+        title,
+        role,
+        duration,
+        contribution,
+        readme_md,
+        overview,
+        category_name,
+        img_url,
+        demo_url,
+        github_url,
+        project_skills (
+          skill_reason,
+          skills (
+            skill_name
+          )
+        )
+      `);
+        // FK에 연결된 project_id 값을 통해 project_skills를 자동으로 조인 + skill_id의 값을 통해
+        // project_skills, skills 테이블을 조인
+        // skill_reason, skill_name을 가져옴.
+      if (error) return;
 
+      const mapped: Project[] = (data ?? []).map((row: any) => {
+        const projectSkills = (row.project_skills as ProjectSkillRow[] | undefined) ?? [];
+        const tags = projectSkills
+          .map((ps) => ps.skills?.skill_name)
+          .filter((name): name is string => Boolean(name));
+
+        /** 이유까지 작성한 기술들만 가져온다. */
+        const skillReasons = projectSkills
+          .filter((ps) => ps.skills?.skill_name && ps.skill_reason?.trim())
+          .map((ps) => ({
+            skillName: ps.skills?.skill_name ?? "",
+            reason: ps.skill_reason ?? "",
+          }));
+
+        return {
+          id: row.id,
+          slug: row.slug,
+          title: row.title,
+          role: row.role ?? "",
+          duration: row.duration ?? "",
+          contribution: row.contribution ?? "",
+          readmeMd: row.readme_md ?? "",
+          description: row.overview ?? "",
+          category: row.category_name as Category,
+          image: row.img_url ?? "",
+          demoUrl: row.demo_url ?? "",
+          githubUrl: row.github_url ?? "",
+          tags,
+          skillReasons,
+        };
+      });
+
+      setProjects(mapped);
+      setFilteredProjects(mapped);
+    };
+
+    fetchProjects();
+  }, []);
+  
   // 카테고리 변경에 따른, 프로젝트 필터링 useEffect 함수
   useEffect(() => {
     if (selectedCategory === "All") {
@@ -97,7 +103,16 @@ const ProjectSection = () => {
       ); // 필터링
       setFilteredProjects(filtered);
     }
-  }, [selectedCategory]);
+  }, [selectedCategory, projects]);
+
+  // 프로젝트 카드 클릭과, 링크 버튼 클릭을 구분하기 위해
+  const handleCardClick = (e: MouseEvent<HTMLElement>, project: Project) => {
+    const target = e.target as HTMLElement;
+    if (target.closest("a, button")) {
+      return;
+    }
+    navigate(`/projects/${project.slug}`, { state: project }); // 클릭 시, slug로 url 설정, state로 project 데이터 넘김
+  };
 
   return (
     <section id="project" className={styles.projectSection}>
@@ -124,7 +139,7 @@ const ProjectSection = () => {
           <article
             key={project.id}
             className={styles.projectCard}
-            onClick={(e) => handleCardClick(e, project.slug)}
+            onClick={(e) => handleCardClick(e, project)}
           >
             <img
               src={project.image}
@@ -145,7 +160,10 @@ const ProjectSection = () => {
               </div>
 
               {/* 링크 연결 */}
-              <div className={styles.links} onClick={(e) => e.stopPropagation()}>
+              <div
+                className={styles.links}
+                onClick={(e) => e.stopPropagation()}
+              >
                 <a
                   href={project.demoUrl}
                   target="_blank"

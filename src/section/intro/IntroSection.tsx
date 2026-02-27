@@ -34,7 +34,7 @@ const IntroSection = () => {
               >
                 <img
                   className={styles.socialIcon}
-                  src="/icons/ic_github.png"
+                  src="/icons/ic_github.svg"
                   alt="GitHub"
                 />
               </a>
