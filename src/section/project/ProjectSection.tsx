@@ -137,10 +137,20 @@ const ProjectSection = () => {
               {/* 링크 연결 */}
               <div className={styles.links}>
                 <a href={project.demoUrl} target="_blank" rel="noreferrer">
-                  Demo
+                  <img
+                    src="/icons/ic_demo.svg"
+                    alt=""
+                    className={styles.linkIcon}
+                  />
+                  <span>Live Demo</span>
                 </a>
                 <a href={project.githubUrl} target="_blank" rel="noreferrer">
-                  GitHub
+                  <img
+                    src="/icons/ic_github.svg"
+                    alt=""
+                    className={styles.linkIcon}
+                  />
+                  <span>GitHub</span>
                 </a>
               </div>
             </div>

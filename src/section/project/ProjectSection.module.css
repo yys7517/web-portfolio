@@ -118,7 +118,7 @@
 }
 
 .links {
-  margin-top: 22px;
+  margin-top: 32px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
@@ -130,21 +130,46 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 12px;
   text-decoration: none;
-  font-size: 28px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
 }
 
 .links a:first-child {
-  background: #ce845f;
+  background: #d97757;
+}
+
+.links a:first-child span {
   color: #fff;
+  display: block;
+  line-height: 1;
 }
 
 .links a:last-child {
-  background: #ecebd8;
-  color: #2b3853;
+  background: #fbf9e3;
+}
+
+.links a:last-child span {
+  color: #2f4568;
+  display: block;
+  line-height: 1;
+}
+
+.linkIcon {
+  width: 24px;
+  height: 24px;
+  display: block;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.links a span {
+  display: block;
+  line-height: 1;
 }
 
 .links a:hover {
-  filter: brightness(0.96);
+  filter: brightness(0.8);
 }
