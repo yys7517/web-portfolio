@@ -5,6 +5,8 @@ import styles from "./ProjectSection.module.css";
 import { supabase } from "../../api/supabaseClient";
 import { useNavigate } from "react-router-dom";
 import type { Project } from "../../type/project";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../store/store";
 
 const categories: Category[] = [
   "All",
@@ -25,6 +27,8 @@ const ProjectSection = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<Category>("All"); // 선택된 카테고리
   const [filteredProjects, setFilteredProjects] = useState(projects); // 선택된 카테고리에 해당하는 프로젝트로 필터링
+
+  const isLoggedin = useSelector((state: RootState) => state.auth.isLoggedIn);
 
   // 최초 Supabase 프로젝트 init 함수
   useEffect(() => {
@@ -49,13 +53,14 @@ const ProjectSection = () => {
           )
         )
       `);
-        // FK에 연결된 project_id 값을 통해 project_skills를 자동으로 조인 + skill_id의 값을 통해
-        // project_skills, skills 테이블을 조인
-        // skill_reason, skill_name을 가져옴.
+      // FK에 연결된 project_id 값을 통해 project_skills를 자동으로 조인 + skill_id의 값을 통해
+      // project_skills, skills 테이블을 조인
+      // skill_reason, skill_name을 가져옴.
       if (error) return;
 
       const mapped: Project[] = (data ?? []).map((row: any) => {
-        const projectSkills = (row.project_skills as ProjectSkillRow[] | undefined) ?? [];
+        const projectSkills =
+          (row.project_skills as ProjectSkillRow[] | undefined) ?? [];
         const tags = projectSkills
           .map((ps) => ps.skills?.skill_name)
           .filter((name): name is string => Boolean(name));
@@ -92,7 +97,7 @@ const ProjectSection = () => {
 
     fetchProjects();
   }, []);
-  
+
   // 카테고리 변경에 따른, 프로젝트 필터링 useEffect 함수
   useEffect(() => {
     if (selectedCategory === "All") {
@@ -114,9 +119,16 @@ const ProjectSection = () => {
     navigate(`/projects/${project.slug}`, { state: project }); // 클릭 시, slug로 url 설정, state로 project 데이터 넘김
   };
 
+  const handleAddProject = () => {
+    navigate("/projects/new");
+  };
+
   return (
     <section id="project" className={styles.projectSection}>
-      <h2 className={styles.title}>PROJECTS</h2>
+      <div className={styles.titleWrap}>
+        <h2 className={styles.title}>PROJECTS</h2>
+        <div className={styles.titleLine} />
+      </div>
 
       <div className={styles.filterRow}>
         {categories.map((category) => (
@@ -165,19 +177,6 @@ const ProjectSection = () => {
                 onClick={(e) => e.stopPropagation()}
               >
                 <a
-                  href={project.demoUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <img
-                    src="/icons/ic_demo.svg"
-                    alt=""
-                    className={styles.linkIcon}
-                  />
-                  <span>Live Demo</span>
-                </a>
-                <a
                   href={project.githubUrl}
                   target="_blank"
                   rel="noreferrer"
@@ -194,6 +193,17 @@ const ProjectSection = () => {
             </div>
           </article>
         ))}
+
+        {isLoggedin && (
+          <button
+            type="button"
+            className={styles.addProjectCard}
+            onClick={handleAddProject}
+          >
+            <img src="/icons/ic_plus.png" alt="" className={styles.addIcon} />
+            <strong>프로젝트 추가</strong>
+          </button>
+        )}
       </div>
     </section>
   );

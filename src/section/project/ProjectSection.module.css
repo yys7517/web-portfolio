@@ -3,14 +3,26 @@
   padding: 64px 48px 96px;
 }
 
+.titleWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 48px;
+}
+
 .title {
   margin: 0;
-  margin-top: 0;
-  text-align: center;
   font-size: 64px;
   font-weight: 800;
   letter-spacing: -0.02em;
   color: #1f3255; /* 진한 네이비 */
+}
+
+.titleLine {
+  width: 320px;
+  height: 1px;
+  background: #b5b5b5;
 }
 
 .filterRow {
@@ -75,11 +87,54 @@ flex로 바꾸고 links에 margin-top: auto를 주면 됩니다. */
   cursor: pointer;
 }
 
+.addProjectCard {
+  min-height: 280px;
+  border-radius: 18px;
+  border: 2px dashed #9fb2d3;
+  background: linear-gradient(180deg, #f8fbff 0%, #edf3ff 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 24px;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.addProjectCard strong {
+  color: #223c68;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.addProjectCard span {
+  color: #4b607f;
+  font-size: 18px;
+  text-align: center;
+  line-height: 1.45;
+}
+
+.addIcon {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .projectCard:hover {
     transform: translateY(-6px);
     box-shadow: 0 14px 28px rgba(7, 12, 24, 0.35);
     border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .addProjectCard:hover {
+    transform: translateY(-6px);
+    border-color: #6f8fcb;
+    box-shadow: 0 14px 28px rgba(7, 12, 24, 0.16);
   }
 }
 
@@ -205,6 +260,18 @@ flex로 바꾸고 links에 margin-top: auto를 주면 됩니다. */
   .projectInfo h3 {
     font-size: 36px;
   }
+
+  .addProjectCard {
+    min-height: 220px;
+  }
+
+  .addProjectCard strong {
+    font-size: 26px;
+  }
+
+  .addProjectCard span {
+    font-size: 16px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -274,6 +341,25 @@ flex로 바꾸고 links에 margin-top: auto를 주면 됩니다. */
   .linkIcon {
     width: 22px;
     height: 22px;
+  }
+
+  .addProjectCard {
+    min-height: 180px;
+    padding: 18px;
+    gap: 10px;
+  }
+
+  .addProjectCard strong {
+    font-size: 21px;
+  }
+
+  .addProjectCard span {
+    font-size: 14px;
+  }
+
+  .addIcon {
+    width: 42px;
+    height: 42px;
   }
 }
 
