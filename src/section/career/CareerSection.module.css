@@ -1,17 +1,274 @@
 .careerSection {
   background: #f5f5f5;
-  padding: 64px 48px 96px;
-  height: 500px;
-  border-top: #ccc 1.5px solid;
-  border-bottom: #ccc 1px solid;
+  padding: 80px 48px 96px;
+  border-top: 1px solid #d9d9d9;
+}
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.titleWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 48px;
 }
 
 .title {
   margin: 0;
-  margin-top: 0;
-  text-align: center;
   font-size: 64px;
   font-weight: 800;
   letter-spacing: -0.02em;
-  color: #1f3255; /* 진한 네이비 */
+  color: #111;
+}
+
+.titleLine {
+  width: 260px;
+  height: 1px;
+  background: #b5b5b5;
+}
+
+.companyList {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+
+.companyCard {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 28px;
+}
+
+.companyLogo {
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+}
+
+.logo {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.logo img {
+  width: 82%;
+  height: 82%;
+  object-fit: contain;
+  display: block;
+}
+
+.companyDetail {
+  border-left: 1px solid #dedede;
+  padding-left: 28px;
+}
+
+.companyName {
+  margin: 0;
+  color: #11161d;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.period {
+  margin-top: 12px;
+  color: #747d8d;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.summary {
+  margin: 16px 0 0;
+  color: #25292f;
+  font-size: 16px;
+  line-height: 1.45;
+  word-break: keep-all;
+}
+
+.roles {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.role {
+  padding: 8px 14px;
+  border-radius: 9px;
+  background: #24262d;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.works {
+  margin-top: 22px;
+}
+
+.work {
+  padding: 18px 0 16px;
+  border-top: 1px solid #dddddd;
+}
+
+.work:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.work h5 {
+  margin: 0;
+  color: #1f2126;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.4;
+  padding-left: 12px;
+  border-left: 5px solid #252525;
+}
+
+.workPeriod {
+  margin-top: 10px;
+  color: #7d8797;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.work p {
+  margin: 12px 0 0;
+  color: #2d2f34;
+  font-size: 14px;
+  word-break: keep-all;
+}
+
+@media (max-width: 1024px) {
+  .careerSection {
+    padding: 64px 24px 80px;
+  }
+
+  .title {
+    font-size: 50px;
+  }
+
+  .titleLine {
+    width: 220px;
+  }
+
+  .companyCard {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .companyLogo {
+    justify-content: flex-start;
+  }
+
+  .logo {
+    width: 160px;
+    height: 160px;
+  }
+
+  .companyDetail {
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .companyName {
+    margin-top: 12px;
+    font-size: 24px;
+  }
+
+  .period {
+    font-size: 16px;
+  }
+
+  .summary {
+    font-size: 16px;
+  }
+
+  .role {
+    font-size: 14px;
+  }
+
+  .work h5 {
+    font-size: 18px;
+  }
+
+  .workPeriod {
+    font-size: 16px;
+  }
+
+  .work p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .careerSection {
+    padding: 52px 14px 64px;
+  }
+
+  .title {
+    font-size: 40px;
+  }
+
+  .titleLine {
+    width: 170px;
+  }
+
+  .companyList {
+    gap: 36px;
+  }
+
+  .logo {
+    width: 160px;
+    height: 160px;
+  }
+
+  .companyName {
+    font-size: 24px;
+  }
+
+  .period {
+    font-size: 16px;
+  }
+
+  .summary {
+    font-size: 16px;
+  }
+
+  .roles {
+    gap: 8px;
+  }
+
+  .role {
+    font-size: 14px;
+    padding: 7px 10px;
+  }
+
+  .works {
+    margin-top: 16px;
+  }
+
+  .work h5 {
+    font-size: 18px;
+    border-left-width: 4px;
+    padding-left: 9px;
+  }
+
+  .workPeriod {
+    font-size: 14px;
+  }
+
+  .work p {
+    font-size: 14px;
+  }
 }
