@@ -36,7 +36,10 @@ const skills = [
 const SkillSection = () => {
   return (
     <section id="skills" className={styles.skillSection}>
-      <h2 className={styles.title}>SKILLS</h2>
+      <div className={styles.titleWrap}>
+          <h2 className={styles.title}>SKILLS</h2>
+          <div className={styles.titleLine} />
+        </div>
 
       <div className={styles.card}>
         {skills.map((group) => (
