@@ -31,7 +31,7 @@ const Login = () => {
 
     // 로그인 처리
     dispatch(login());
-    navigate("/");
+    navigate(-1); // 로그인 성공 후 이전 페이지로 이동
   };
 
   return (
