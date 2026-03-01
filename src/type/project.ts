@@ -17,7 +17,6 @@ export type Project = {
   category: Category;
   tags: string[];
   image: string;
-  demoUrl: string;
   githubUrl: string;
   skillReasons: SkillReason[];
 };

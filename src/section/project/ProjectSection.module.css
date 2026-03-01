@@ -185,60 +185,21 @@ flex로 바꾸고 links에 margin-top: auto를 주면 됩니다. */
   line-height: 1;
 }
 
-.links {
+.viewMore {
   margin-top: auto;
-  padding-top: 32px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-.links a {
-  height: 52px;
-  border-radius: 12px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  text-decoration: none;
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 1;
-}
-
-.links a:first-child {
-  background: #d97757;
-}
-
-.links a:first-child span {
-  color: #fff;
-  display: block;
-  line-height: 1;
-}
-
-.links a:last-child {
-  background: #fbf9e3;
-  border: #122c4f 1px solid;
-}
-
-.links a:last-child span {
+  padding-top: 24px;
   color: #2f4568;
-  display: block;
-  line-height: 1;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-align: right;
+  transition: color 0.2s ease;
 }
 
-.linkIcon {
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
-}
-
-.links a span {
-  margin-left: -4px;
-}
-
-.links a:hover {
-  filter: brightness(0.8);
+@media (hover: hover) and (pointer: fine) {
+  .projectCard:hover .viewMore {
+    color: #1f3255;
+  }
 }
 
 /* 반응형 디자인 */
@@ -327,20 +288,9 @@ flex로 바꾸고 links에 margin-top: auto를 주면 됩니다. */
     font-size: 14px;
   }
 
-  .links {
-    padding-top: 20px;
-    gap: 8px;
-  }
-
-  .links a {
-    height: 46px;
-    font-size: 16px;
-    gap: 8px;
-  }
-
-  .linkIcon {
-    width: 22px;
-    height: 22px;
+  .viewMore {
+    padding-top: 16px;
+    font-size: 15px;
   }
 
   .addProjectCard {

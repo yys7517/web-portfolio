@@ -44,7 +44,6 @@ const ProjectSection = () => {
         overview,
         category_name,
         img_url,
-        demo_url,
         github_url,
         project_skills (
           skill_reason,
@@ -171,25 +170,7 @@ const ProjectSection = () => {
                 ))}
               </div>
 
-              {/* 링크 연결 */}
-              <div
-                className={styles.links}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <img
-                    src="/icons/ic_github.svg"
-                    alt=""
-                    className={styles.linkIcon}
-                  />
-                  <span>GitHub</span>
-                </a>
-              </div>
+              <div className={styles.viewMore}>View More →</div>
             </div>
           </article>
         ))}
