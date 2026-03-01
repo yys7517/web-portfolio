@@ -23,13 +23,14 @@
 
 .row {
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
   gap: 28px;
   padding: 18px 0;
 }
 
 /* 카테고리 이름 */
-.row span {
+.category span {
   text-align: left;
   font-size: 24px;
   margin-left: 16px;
@@ -67,4 +68,83 @@
   /* 배경과 글씨색 */
   background: #3b82f6;
   color: #fff;
+}
+
+@media (max-width: 1024px) {
+  .skillSection {
+    padding: 64px 20px;
+  }
+
+  .title {
+    font-size: 52px;
+    margin-bottom: 28px;
+  }
+
+  .card {
+    padding: 28px 24px;
+    border-radius: 20px;
+  }
+
+  .row {
+    gap: 20px;
+    padding: 14px 0;
+  }
+
+  .category {
+    width: 180px;
+  }
+
+  .category span {
+    font-size: 20px;
+    margin-left: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .skillSection {
+    padding: 44px 14px;
+  }
+
+  .title {
+    font-size: 40px;
+    margin-bottom: 20px;
+  }
+
+  .card {
+    padding: 20px 14px;
+    border-radius: 16px;
+  }
+
+  .row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 12px 0;
+  }
+
+  .category {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .category span {
+    margin-left: 0;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .tags {
+    gap: 8px;
+  }
+
+  .tag {
+    padding: 7px 12px;
+    font-size: 14px;
+    border-radius: 10px;
+  }
 }
