@@ -51,6 +51,8 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/projects/:slug" element={<ProjectDetailPage />} />
+          <Route path="/projects/:slug/edit" element={<ProjectFormPage />} />
+          <Route path="/projects/new" element={<ProjectFormPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
