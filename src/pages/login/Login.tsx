@@ -38,8 +38,8 @@ const Login = () => {
     <div className={styles.loginPage}>
       <div className={styles.loginCard}>
         {/* 뒤로가기 버튼 */}
-        <button className={styles.backButton} onClick={() => navigate("/")}>
-          &larr; Back
+        <button className={styles.backButton} onClick={() => navigate(-1)}>
+          &lt; Back
         </button>
 
         <div className={styles.heading}>

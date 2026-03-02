@@ -40,6 +40,9 @@
 }
 
 .backButton {
+  font-family:
+    "Noto Sans KR", "Apple SD Gothic Neo", "돋움", Dotum, "Helvetica Neue",
+    Arial, sans-serif;
   height: 40px;
   border-radius: 12px;
   padding: 0 14px;
@@ -52,6 +55,10 @@
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
+}
+
+.backButton:hover {
+  background: #e8efff;
 }
 
 .form {

@@ -20,7 +20,7 @@
 }
 
 .titleLine {
-  width: 240px;
+  width: 220px;
   height: 1px;
   background: white;
 }
@@ -96,7 +96,10 @@
 
   .title {
     font-size: 44px;
-    margin-bottom: 24px;
+  }
+
+  .titleLine {
+    width: 170px;
   }
 
   .card {
@@ -122,7 +125,10 @@
 
   .title {
     font-size: 34px;
-    margin-bottom: 18px;
+  }
+
+  .titleLine {
+    width: 130px;
   }
 
   .card {
