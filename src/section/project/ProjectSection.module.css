@@ -3,12 +3,23 @@
   padding: 64px 48px 96px;
 }
 
+.topHeader {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: start;
+  column-gap: 16px;
+  margin-bottom: 10px;
+}
+
 .titleWrap {
+  grid-column: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  margin-bottom: 48px;
+  margin-bottom: 0;
 }
 
 .title {
@@ -20,13 +31,48 @@
 }
 
 .titleLine {
-  width: 320px;
+  width: 260px;
   height: 1px;
   background: #b5b5b5;
 }
 
+.addProjectButton {
+  grid-column: 3;
+  justify-self: end;
+  align-self: start;
+  margin-top: 4px;
+  height: 48px;
+  border-radius: 999px;
+  border: 1px solid #b7c7df;
+  background: linear-gradient(180deg, #f8fbff 0%, #eaf2ff 100%);
+  color: #1f3560;
+  padding: 0 16px 0 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease;
+}
+
+.addButtonIcon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .addProjectButton:hover {
+    background: #dfe8f7;
+    border-color: #7c9dd0;
+  }
+}
+
 .filterRow {
-  margin-top: 32px;
+  margin-top: 24px;
   display: flex;
   justify-content: center;
   gap: 14px;
@@ -52,7 +98,8 @@
   color: #1f3255;
 }
 
-.active {
+.filterButton.active,
+.filterButton.active:hover {
   background: #d77f5d; /* 포인트 컬러 */
   color: #fff;
   border-color: #d77f5d;
@@ -89,7 +136,7 @@ flex로 바꾸고 links에 margin-top: auto를 주면 됩니다. */
 
 .addProjectCard {
   min-height: 280px;
-  border-radius: 18px;
+  border-radius: 999px;
   border: 2px dashed #9fb2d3;
   background: linear-gradient(180deg, #f8fbff 0%, #edf3ff 100%);
   display: flex;
@@ -132,9 +179,7 @@ flex로 바꾸고 links에 margin-top: auto를 주면 됩니다. */
   }
 
   .addProjectCard:hover {
-    transform: translateY(-6px);
     border-color: #6f8fcb;
-    box-shadow: 0 14px 28px rgba(7, 12, 24, 0.16);
   }
 }
 
@@ -203,35 +248,25 @@ flex로 바꾸고 links에 margin-top: auto를 주면 됩니다. */
 }
 
 /* 반응형 디자인 */
-@media (max-width: 1100px) {
+@media (max-width: 1024px) {
   .projectSection {
     padding: 56px 28px 80px;
+  }
+
+  .topHeader {
+    column-gap: 10px;
   }
 
   .title {
     font-size: 52px;
   }
 
-  .projectList {
-    max-width: 760px;
-    grid-template-columns: 1fr;
-    gap: 24px;
+  .titleLine {
+    width: 220px;
   }
 
   .projectInfo h3 {
     font-size: 36px;
-  }
-
-  .addProjectCard {
-    min-height: 220px;
-  }
-
-  .addProjectCard strong {
-    font-size: 26px;
-  }
-
-  .addProjectCard span {
-    font-size: 16px;
   }
 }
 
@@ -240,8 +275,32 @@ flex로 바꾸고 links에 margin-top: auto를 주면 됩니다. */
     padding: 44px 16px 64px;
   }
 
+  .topHeader {
+    grid-template-columns: 1fr;
+    row-gap: 10px;
+    margin-bottom: 6px;
+  }
+
+  .titleWrap {
+    grid-column: 1;
+  }
+
   .title {
     font-size: 40px;
+  }
+
+  .addProjectButton {
+    grid-column: 1;
+    margin-top: 0;
+    justify-self: end;
+    height: 40px;
+    font-size: 15px;
+    padding: 0 12px 0 10px;
+  }
+
+  .addButtonIcon {
+    width: 16px;
+    height: 16px;
   }
 
   .filterRow {
@@ -261,8 +320,9 @@ flex로 바꾸고 links에 margin-top: auto를 주면 됩니다. */
   }
 
   .projectList {
-    margin-top: 28px;
-    gap: 20px;
+    max-width: 760px;
+    grid-template-columns: 1fr;
+    gap: 24px;
   }
 
   .projectInfo {
@@ -292,24 +352,11 @@ flex로 바꾸고 links에 margin-top: auto를 주면 됩니다. */
     padding-top: 16px;
     font-size: 15px;
   }
+}
 
-  .addProjectCard {
-    min-height: 180px;
-    padding: 18px;
-    gap: 10px;
-  }
-
-  .addProjectCard strong {
-    font-size: 21px;
-  }
-
-  .addProjectCard span {
-    font-size: 14px;
-  }
-
-  .addIcon {
-    width: 42px;
-    height: 42px;
+@media (max-width: 640px) {
+  .titleLine {
+    width: 170px;
   }
 }
 
@@ -320,6 +367,13 @@ flex로 바꾸고 links에 margin-top: auto를 주면 됩니다. */
 
   .title {
     font-size: 34px;
+  }
+
+  .addProjectButton {
+    height: 36px;
+    font-size: 14px;
+    padding: 0 10px 0 8px;
+    gap: 8px;
   }
 
   .projectCard {

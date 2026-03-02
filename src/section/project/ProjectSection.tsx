@@ -1,21 +1,12 @@
 import { useEffect, useState } from "react";
 import type { MouseEvent } from "react";
-import type { Category } from "../../type/category";
+import { categoryFilters, type Category, type CategoryFilter } from "../../type/category";
 import styles from "./ProjectSection.module.css";
 import { supabase } from "../../api/supabaseClient";
 import { useNavigate } from "react-router-dom";
 import type { Project } from "../../type/project";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store/store";
-
-const categories: Category[] = [
-  "All",
-  "Fullstack",
-  "Frontend",
-  "Backend",
-  "Mobile",
-  "DevOps",
-];
 
 type ProjectSkillRow = {
   skill_reason: string | null;
@@ -25,7 +16,7 @@ type ProjectSkillRow = {
 const ProjectSection = () => {
   const navigate = useNavigate();
   const [projects, setProjects] = useState<Project[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<Category>("All"); // 선택된 카테고리
+  const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>("All"); // 선택된 카테고리
   const [filteredProjects, setFilteredProjects] = useState(projects); // 선택된 카테고리에 해당하는 프로젝트로 필터링
 
   const isLoggedin = useSelector((state: RootState) => state.auth.isLoggedIn);
@@ -118,26 +109,40 @@ const ProjectSection = () => {
     navigate(`/projects/${project.slug}`, { state: project }); // 클릭 시, slug로 url 설정, state로 project 데이터 넘김
   };
 
+  // 프로젝트 추가 페이지로 이동
   const handleAddProject = () => {
     navigate("/projects/new");
   };
 
   return (
     <section id="project" className={styles.projectSection}>
-      <div className={styles.titleWrap}>
-        <h2 className={styles.title}>PROJECTS</h2>
-        <div className={styles.titleLine} />
+      <div className={styles.topHeader}>
+        <div className={styles.titleWrap}>
+          <h2 className={styles.title}>PROJECTS</h2>
+          <div className={styles.titleLine} />
+        </div>
+
+        {isLoggedin && (
+          <button
+            type="button"
+            className={styles.addProjectButton}
+            onClick={handleAddProject}
+          >
+            <img src="/icons/ic_plus.png" alt="" className={styles.addButtonIcon} />
+            <span>프로젝트 추가</span>
+          </button>
+        )}
       </div>
 
       <div className={styles.filterRow}>
-        {categories.map((category) => (
+        {categoryFilters.map((category) => (
           <button
             key={category}
             // .filterButton active 여부 감지
             className={`${styles.filterButton} ${
               selectedCategory === category ? styles.active : ""
             }`}
-            onClick={() => setSelectedCategory(category)}
+            onClick={() => setSelectedCategory(category as CategoryFilter)}
           >
             {category}
           </button>
@@ -170,21 +175,10 @@ const ProjectSection = () => {
                 ))}
               </div>
 
-              <div className={styles.viewMore}>View More →</div>
+              <div className={styles.viewMore}>View More &rarr;</div>
             </div>
           </article>
         ))}
-
-        {isLoggedin && (
-          <button
-            type="button"
-            className={styles.addProjectCard}
-            onClick={handleAddProject}
-          >
-            <img src="/icons/ic_plus.png" alt="" className={styles.addIcon} />
-            <strong>프로젝트 추가</strong>
-          </button>
-        )}
       </div>
     </section>
   );
