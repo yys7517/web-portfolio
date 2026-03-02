@@ -7,10 +7,13 @@ import {
 } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
+import ScrollTopButton from "./components/ScrollTopButton";
 import ProjectDetailPage from "./pages/projectdetail/ProjectDetailPage";
 import HomePage from "./pages/HomePage";
 import { useEffect } from "react";
 import Login from "./pages/login/Login";
+import ProjectFormPage from "./pages/projectform/ProjectFormPage";
 
 // 공통 껍데기 컴포넌트
 function Layout() {
@@ -34,6 +37,8 @@ function Layout() {
       <Header />
       {/* Outlet: 헤더 아래에 중첩 페이지 구조를 처리 */}
       <Outlet />
+      <Footer />
+      <ScrollTopButton />
     </>
   );
 }
