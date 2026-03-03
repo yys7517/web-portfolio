@@ -9,22 +9,22 @@ const skills = [
   {
     category: "Language",
     icon: langIcon,
-    items: ["TypeScript", "JavaScript", "Kotlin", "Java", "Swift"],
+    items: [ "Kotlin", "Java", "TypeScript", "JavaScript"]
   },
   {
     category: "Frontend",
     icon: feIcon,
-    items: ["React", "CSS Module", "Vite"],
+    items: ["React","Redux", "React-Query", "React-Hook-Form", "Vite", "CSS Modules"],
   },
   {
     category: "Backend",
     icon: beIcon,
-    items: ["Spring(Boot)", "Firebase", "Gradle", "Supabase", "Node.js"],
+    items: ["Spring (Boot)", "Firebase", "Supabase"],
   },
   {
     category: "Mobile",
     icon: mobileIcon,
-    items: ["Android", "iOS", "React Native", "Flutter"],
+    items: ["Android", "iOS", "Jetpack Compose", "Hilt", "Clean Architecture"],
   },
   {
     category: "DevOps",
@@ -51,7 +51,7 @@ const SkillSection = () => {
 
             <ul className={styles.tags}>
               {group.items.map((item) => (
-                <li key={item} className={styles.tag}>
+                <li key={item} className={styles.tag} data-skill={item}>
                   {item}
                 </li>
               ))}

@@ -1,5 +1,5 @@
 .skillSection {
-  background: #5a9ad6;
+  background: #6c7fa3;
   padding: 72px 24px 88px;
 }
 
@@ -45,9 +45,9 @@
 /* 카테고리 이름 */
 .category span {
   text-align: left;
-  font-size: 16px;
+  font-size: 18px;
   margin-left: 0;
-  font-weight: 800;
+  font-weight: 700;
   color: #1f2634;
 }
 
@@ -56,7 +56,6 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 16px;
 }
 
 .icon {
@@ -79,13 +78,124 @@
 .tag {
   padding: 7px 12px;
   border-radius: 10px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 1;
   white-space: nowrap;
+}
 
-  /* 배경과 글씨색 */
-  background: #3b82f6;
+/* Language */
+.tag[data-skill="TypeScript"] {
+  background: #3a76d1;
+  color: #fff;
+}
+
+.tag[data-skill="JavaScript"] {
+  background: #f1dc1b;
+  color: #111;
+}
+
+.tag[data-skill="Kotlin"] {
+  background: #9f34df;
+  color: #fff;
+}
+
+.tag[data-skill="Java"] {
+  background: #d94136;
+  color: #fff;
+}
+
+/* Frontend */
+.tag[data-skill="React"] {
+  background: #0a0a0a;
+  color: #fff;
+}
+
+.tag[data-skill="Redux"] {
+  background: #7c5ce0;
+  color: #fff;
+}
+
+.tag[data-skill="React-Query"] {
+  background: #ff4666;
+  color: #fff;
+}
+
+.tag[data-skill="React-Hook-Form"] {
+  background: #0f1b3f;
+  color: #fff;
+}
+
+.tag[data-skill="Vite"] {
+  background: #7f61e8;
+  color: #fff;
+}
+
+.tag[data-skill="CSS Modules"] {
+  background: #44b5e8;
+  color: #fff;
+}
+
+/* Backend */
+.tag[data-skill="Spring (Boot)"] {
+  background: #7db54f;
+  color: #fff;
+}
+
+.tag[data-skill="Firebase"] {
+  background: #f6c52a;
+  color: #111;
+}
+
+.tag[data-skill="Supabase"] {
+  background: #37ad6f;
+  color: #fff;
+}
+
+/* Mobile */
+.tag[data-skill="Android"] {
+  background: #73b442;
+  color: #fff;
+}
+
+.tag[data-skill="iOS"] {
+  background: #2e80bc;
+  color: #fff;
+}
+
+.tag[data-skill="Jetpack Compose"] {
+  background: #4a90e2;
+  color: #fff;
+}
+
+.tag[data-skill="Hilt"] {
+  background: #6b7280;
+  color: #fff;
+}
+
+.tag[data-skill="Clean Architecture"] {
+  background: #2f3b57;
+  color: #fff;
+}
+
+/* DevOps */
+.tag[data-skill="Docker"] {
+  background: #3c74e0;
+  color: #fff;
+}
+
+.tag[data-skill="AWS(EC2)"] {
+  background: #f2a32a;
+  color: #fff;
+}
+
+.tag[data-skill="Redis"] {
+  background: #df5243;
+  color: #fff;
+}
+
+.tag[data-skill="Vercel"] {
+  background: #0f0f10;
   color: #fff;
 }
 
