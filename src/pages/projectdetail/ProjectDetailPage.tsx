@@ -7,6 +7,12 @@ import remarkGfm from "remark-gfm";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store/store";
 import { supabase } from "../../api/supabaseClient";
+import rehypeRaw from "rehype-raw";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import {
+  darcula,
+  lightfair,
+} from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 const ProjectDetailPage = () => {
   const location = useLocation();
@@ -46,7 +52,7 @@ const ProjectDetailPage = () => {
 
       if (projectDeleteError) throw projectDeleteError;
 
-      navigate("/#project");  // 삭제 후 목록으로 이동
+      navigate("/#project"); // 삭제 후 목록으로 이동
     } catch (err) {
       console.error(err);
       window.alert("프로젝트 삭제에 실패했습니다.");
@@ -154,7 +160,33 @@ const ProjectDetailPage = () => {
         </section>
 
         <section className={styles.markdownSection}>
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            rehypePlugins={rehypeRaw as any}
+            components={{
+              code({ node, inline, className, children, ...props }: any) {
+                // className에 'language-java' 같은 값이 있는지 확인합니다.
+                const match = /language-(\w+)/.exec(className || "");
+
+                return !inline && match ? (
+                  // 언어 태그가 있는 코드 블록인 경우 하이라이터 적용
+                  <SyntaxHighlighter
+                    {...props}
+                    style={darcula}
+                    language={match[1]}
+                    PreTag="div"
+                  >
+                    {String(children).replace(/\n$/, "")}
+                  </SyntaxHighlighter>
+                ) : (
+                  // 백틱(`) 하나로 감싼 인라인 코드인 경우 기본 스타일 적용
+                  <code {...props} className={className}>
+                    {children}
+                  </code>
+                );
+              },
+            }}
+          >
             {project.readmeMd ||
               "프로젝트 상세 설명이 아직 등록되지 않았습니다."}
           </ReactMarkdown>

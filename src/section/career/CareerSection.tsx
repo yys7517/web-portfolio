@@ -24,7 +24,7 @@ const companies: Company[] = [
       "AI 음성인식 솔루션을 통해, 기업 별 맞춤화 답변을 제공하는 서비스 플랫폼",
     roles: ["Android 개발"],
     logoImage:
-      "https://imgs.jobkorea.co.kr/img1/_whitebg/200X80/Co_Logo/Logo/2022/1/03/JK_CO_Uyj4u7E22010315403779.png?v=202603012034",
+      "https://media.licdn.com/dms/image/v2/D560BAQHR_3ILi9UL5A/company-logo_200_200/company-logo_200_200/0/1712638637523/daquv_logo?e=1773878400&v=beta&t=y3RqXSiXuPY56Vu8-o7NprPjUOzxeGv05BMhKxxBxmY",
     logoAlt: "다큐브 로고",
     works: [
       {
