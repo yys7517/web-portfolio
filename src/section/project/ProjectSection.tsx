@@ -150,7 +150,15 @@ const ProjectSection = () => {
       </div>
 
       {/* 프로젝트 목록 */}
-      <div className={styles.projectList}>
+      <div
+        className={`${styles.projectList} ${
+          filteredProjects.length === 0 ? styles.projectListEmpty : ""
+        }`}
+      >
+        {filteredProjects.length === 0 && (
+          <p className={styles.projectEmpty}>등록된 프로젝트가 없습니다.</p>
+        )}
+
         {filteredProjects.map((project) => (
           <article
             key={project.id}

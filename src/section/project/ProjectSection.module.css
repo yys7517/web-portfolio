@@ -114,8 +114,20 @@
   gap: 28px;
 }
 
-/* 버튼 영역을 카드 하단에 고정하려면 projectInfo를 세로 
-flex로 바꾸고 links에 margin-top: auto를 주면 됩니다. */
+.projectListEmpty {
+  grid-template-columns: 1fr;
+  min-height: 320px;
+  align-items: center; /* 중앙 배치 */
+  justify-content: center; /* 중앙 배치 */
+}
+
+.projectEmpty {
+  margin: 0;
+  text-align: center;
+  color: #61708a;
+  font-size: 18px;
+  font-weight: 600;
+}
 
 .projectCard {
   display: flex;
@@ -132,37 +144,6 @@ flex로 바꾸고 links에 margin-top: auto를 주면 됩니다. */
     border-color 180ms ease;
   will-change: transform;
   cursor: pointer;
-}
-
-.addProjectCard {
-  min-height: 280px;
-  border-radius: 999px;
-  border: 2px dashed #9fb2d3;
-  background: linear-gradient(180deg, #f8fbff 0%, #edf3ff 100%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  padding: 24px;
-  cursor: pointer;
-  transition:
-    transform 180ms ease,
-    box-shadow 180ms ease,
-    border-color 180ms ease;
-}
-
-.addProjectCard strong {
-  color: #223c68;
-  font-size: 30px;
-  font-weight: 800;
-}
-
-.addProjectCard span {
-  color: #4b607f;
-  font-size: 18px;
-  text-align: center;
-  line-height: 1.45;
 }
 
 .addIcon {
