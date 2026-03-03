@@ -2,14 +2,9 @@ import { useEffect, useState } from "react";
 import type { MouseEvent } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styles from "./Header.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "../store/store";
-import { logout } from "../store/authSlice";
-import { supabase } from "../api/supabaseClient";
 
 const Header = () => {
-  const isLoggedin = useSelector((state: RootState) => state.auth.isLoggedIn);
-  const dispatch = useDispatch();
+  
   const navigate = useNavigate();
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,13 +25,6 @@ const Header = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-  const handleLogout = () => {
-    supabase.auth.signOut();
-    dispatch(logout());
-    navigate("/");
-    setIsMenuOpen(false);
-  };
 
   const moveToSection = (
     e: MouseEvent<HTMLAnchorElement>,
@@ -128,22 +116,6 @@ const Header = () => {
               >
                 Careers
               </Link>
-            </li>
-
-            <li>
-              {isLoggedin ? (
-                <button
-                  type="button"
-                  className={`${styles.link} ${styles.linkButton}`}
-                  onClick={handleLogout}
-                >
-                  Logout
-                </button>
-              ) : (
-                <Link className={styles.link} to={{ pathname: "/login" }}>
-                  Login
-                </Link>
-              )}
             </li>
           </ul>
         </nav>

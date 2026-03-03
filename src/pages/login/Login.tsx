@@ -30,7 +30,7 @@ const Login = () => {
     }
 
     // 로그인 처리
-    dispatch(login());
+    dispatch(login({ userEmail: email })); // 이메일을 액션 페이로드로 전달
     navigate(-1); // 로그인 성공 후 이전 페이지로 이동
   };
 
