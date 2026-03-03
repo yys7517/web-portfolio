@@ -6,22 +6,22 @@ const IntroSection = () => {
       <div className={styles.intro}>
         <img className={styles.introImg} src="/images/bg_banner.jpeg" alt="" />
         <div className={styles.introduction}>
-          <h1>안녕하세요. 윤영선입니다.</h1>
+          <h1>안녕하세요 윤영선입니다.</h1>
           <p>
-            항상 사용자 입장에서의 사용성과 편의성을 최우선으로 생각하며
-            개발하려고 노력합니다.
+            사용자 경험을 중심으로 명확한 구조와 안정적인 구현을 지향합니다.
           </p>
         </div>
+
         <div className={styles.overlay} />
+        <div className={styles.lastUpdate}>last update : 26.03.03</div>
       </div>
 
-      <div className={styles.profileCard}>
+      <section id="about" className={styles.profileCard}>
         <img
           className={styles.avatar}
           src="/images/profile.jpeg"
           alt="윤영선 프로필"
         />
-
         <div className={styles.profileInfo}>
           <div className={styles.nameRow}>
             <h2>윤영선</h2>
@@ -69,11 +69,7 @@ const IntroSection = () => {
 
           <div className={styles.metaGrid}>
             <p>
-              <img
-                src="/icons/ic_phone.png"
-                alt=""
-                className={styles.metaIcon}
-              />
+              <img src="/icons/ic_phone.png" alt="" className={styles.metaIcon} />
               010-3224-8732
             </p>
             <p>
@@ -85,24 +81,16 @@ const IntroSection = () => {
               1997.10.01
             </p>
             <p>
-              <img
-                src="/icons/ic_mail.png"
-                alt=""
-                className={styles.metaIcon}
-              />
+              <img src="/icons/ic_mail.png" alt="" className={styles.metaIcon} />
               yys7517@naver.com
             </p>
             <p>
-              <img
-                src="/icons/ic_school.png"
-                alt=""
-                className={styles.metaIcon}
-              />
+              <img src="/icons/ic_school.png" alt="" className={styles.metaIcon} />
               성결대학교 컴퓨터공학과
             </p>
           </div>
         </div>
-      </div>
+      </section>
     </section>
   );
 };

@@ -21,7 +21,15 @@
 .overlay {
   position: absolute;
   inset: 0;
-  background: rgba(10, 16, 28, 0.35);
+  background: rgba(10, 16, 28, 0.55);
+}
+
+.lastUpdate {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .introduction {
@@ -38,16 +46,15 @@
 }
 
 .introduction h1 {
-  font-size: clamp(32px, 4vw, 64px);
-  line-height: 1.2;
-  margin-bottom: 20px;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  font-size: 64px;
+  margin-bottom: 16px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .introduction p {
-  font-size: clamp(18px, 2vw, 40px);
+  font-size: 24px;
   color: #c7d2fe;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .profileCard {
@@ -56,7 +63,7 @@
   margin: 0 auto;
   padding: 40px;
   display: flex;
-  gap: 48px;
+  gap: 80px;
   align-items: center;
 }
 
@@ -106,15 +113,8 @@
 .metaGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(220px, 1fr));
-  gap: 20px 60px;
+  gap: 20px 200px;
   font-size: 16px;
-}
-
-.metaGrid p {
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 12px;
 }
 
 .metaGrid p {
@@ -138,10 +138,22 @@
   flex-shrink: 0;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .profileCard {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .introduction h1 {
+    font-size: 48px;
+  }
+
+  .introduction p {
+    font-size: 24px;
+  }
+
+  .avatar {
+    margin: auto;
   }
 
   .nameRow {
@@ -150,10 +162,39 @@
 
   .metaGrid {
     grid-template-columns: 1fr;
-    font-size: 24px;
+    font-size: 16px;
   }
 
   .nameRow h2 {
-    font-size: 42px;
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .introduction h1 {
+    font-size: 24px;
+  }
+
+  .introduction p {
+    font-size: 14px;
+  }
+
+  .profileCard {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .avatar {
+    width: 100%;
+    height: auto;
+    margin: auto;
+    align-items: start;
+  }
+
+  .nameRow {
+    flex-wrap: wrap;
+  }
+
+  .nameRow h2 {
+    font-size: 24px;
   }
 }

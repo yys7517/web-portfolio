@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import type { MouseEvent } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styles from "./Header.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -37,11 +38,43 @@ const Header = () => {
     setIsMenuOpen(false);
   };
 
+  const moveToSection = (
+    e: MouseEvent<HTMLAnchorElement>,
+    sectionId: string,
+  ) => {
+    e.preventDefault();
+    navigateToSection(sectionId);
+  };
+
+  const navigateToSection = (sectionId: string) => {
+    setIsMenuOpen(false);
+
+    if (location.pathname !== "/") {
+      navigate({ pathname: "/", hash: `#${sectionId}` });
+      return;
+    }
+
+    const el = document.getElementById(sectionId);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (location.hash !== `#${sectionId}`) {
+      navigate({ pathname: "/", hash: `#${sectionId}` }, { replace: true });
+    }
+  };
+
+  const handleLogoClick = () => {
+    navigateToSection("intro");
+  };
+
   return (
     <header className={styles.header}>
       <div className={styles.headerNav}>
-        <div className={styles.logo}>Portfolio</div>
-
+        <button
+          type="button"
+          className={styles.logoButton}
+          onClick={handleLogoClick}
+        >
+          YYS's Portfolio
+        </button>
         <button
           type="button"
           className={`${styles.menuButton} ${isMenuOpen ? styles.menuButtonOpen : ""}`}
@@ -63,15 +96,17 @@ const Header = () => {
             <li>
               <Link
                 className={styles.link}
-                to={{ pathname: "/", hash: "#intro" }}
+                to="/#about"
+                onClick={(e) => moveToSection(e, "about")}
               >
-                Home
+                About me
               </Link>
             </li>
             <li>
               <Link
                 className={styles.link}
-                to={{ pathname: "/", hash: "#skills" }}
+                to="/#skills"
+                onClick={(e) => moveToSection(e, "skills")}
               >
                 Skills
               </Link>
@@ -79,7 +114,8 @@ const Header = () => {
             <li>
               <Link
                 className={styles.link}
-                to={{ pathname: "/", hash: "#project" }}
+                to="/#project"
+                onClick={(e) => moveToSection(e, "project")}
               >
                 Projects
               </Link>
@@ -87,7 +123,8 @@ const Header = () => {
             <li>
               <Link
                 className={styles.link}
-                to={{ pathname: "/", hash: "#career" }}
+                to="/#career"
+                onClick={(e) => moveToSection(e, "career")}
               >
                 Careers
               </Link>

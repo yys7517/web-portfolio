@@ -23,10 +23,15 @@
   gap: 0;
 }
 
-.logo {
+.logoButton {
   font-size: 24px;
   font-weight: 700;
   color: #fff;
+  cursor: pointer;
+  border: 0;
+  background: none;
+  text-decoration: none;
+  padding: 0;
 }
 
 .menuButton {
@@ -85,7 +90,7 @@
     gap: 0;
   }
 
-  .logo {
+  .logoButton {
     font-size: 24px;
   }
 
@@ -109,21 +114,6 @@
     height: 2px;
     border-radius: 999px;
     background: #f3f5ef;
-    transition:
-      transform 0.2s ease,
-      opacity 0.2s ease;
-  }
-
-  .menuButtonOpen span:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-  }
-
-  .menuButtonOpen span:nth-child(2) {
-    opacity: 0;
-  }
-
-  .menuButtonOpen span:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
   }
 
   .nav {

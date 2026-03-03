@@ -88,7 +88,6 @@ video {
   padding: 0;
   border: 0;
   font-size: 100%;
-  scroll-padding-top: 72px; /* 앵커 이동 전역 오프셋 */
   vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -112,6 +111,10 @@ body {
     Arial, sans-serif;
 }
 
+html {
+  scroll-padding-top: 84px;
+}
+
 ol,
 ul {
   list-style: none;
@@ -132,6 +135,10 @@ table {
   border-spacing: 0;
 }
 
-#project {
-  scroll-padding-top: 20px;
+#intro,
+#about,
+#skills,
+#project,
+#career {
+  scroll-margin-top: 84px;
 }
