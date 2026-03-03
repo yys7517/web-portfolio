@@ -9,10 +9,7 @@ import type { RootState } from "../../store/store";
 import { supabase } from "../../api/supabaseClient";
 import rehypeRaw from "rehype-raw";
 import SyntaxHighlighter from "react-syntax-highlighter";
-import {
-  darcula,
-  lightfair,
-} from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { darcula } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 const ProjectDetailPage = () => {
   const location = useLocation();

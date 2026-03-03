@@ -166,7 +166,7 @@
 
 .projectImg {
   width: 100%;
-  aspect-ratio: 3 / 2;
+  height: 400px;
   object-fit: cover;
   display: block;
   background: #d8d8dc;
@@ -246,6 +246,15 @@
     width: 220px;
   }
 
+  .projectCard {
+    flex-direction: column;
+    margin: 16px;
+  }
+
+  .projectImg {
+    height: 300px;
+  }
+
   .projectInfo h3 {
     font-size: 36px;
   }
@@ -306,6 +315,10 @@
     gap: 24px;
   }
 
+  .projectImg {
+    height: 240px;
+  }
+
   .projectInfo {
     padding: 18px 16px 16px;
   }
@@ -344,6 +357,10 @@
 @media (max-width: 420px) {
   .projectSection {
     padding: 36px 12px 56px;
+  }
+
+  .projectImg {
+    height: 200px;
   }
 
   .title {

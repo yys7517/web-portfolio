@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import type { MouseEvent } from "react";
-import { categoryFilters, type Category, type CategoryFilter } from "../../type/category";
+import {
+  categoryFilters,
+  type Category,
+  type CategoryFilter,
+} from "../../type/category";
 import styles from "./ProjectSection.module.css";
 import { supabase } from "../../api/supabaseClient";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +20,8 @@ type ProjectSkillRow = {
 const ProjectSection = () => {
   const navigate = useNavigate();
   const [projects, setProjects] = useState<Project[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>("All"); // 선택된 카테고리
+  const [selectedCategory, setSelectedCategory] =
+    useState<CategoryFilter>("All"); // 선택된 카테고리
   const [filteredProjects, setFilteredProjects] = useState(projects); // 선택된 카테고리에 해당하는 프로젝트로 필터링
 
   const isLoggedin = useSelector((state: RootState) => state.auth.isLoggedIn);
@@ -24,7 +29,10 @@ const ProjectSection = () => {
   // 최초 Supabase 프로젝트 init 함수
   useEffect(() => {
     const fetchProjects = async () => {
-      const { data, error } = await supabase.from("projects").select(`
+      const { data, error } = await supabase
+        .from("projects")
+        .select(
+          `
         id,
         slug,
         title,
@@ -42,7 +50,10 @@ const ProjectSection = () => {
             skill_name
           )
         )
-      `);
+      `,
+        )
+        .order("duration", { ascending: false });
+
       // FK에 연결된 project_id 값을 통해 project_skills를 자동으로 조인 + skill_id의 값을 통해
       // project_skills, skills 테이블을 조인
       // skill_reason, skill_name을 가져옴.
@@ -61,7 +72,8 @@ const ProjectSection = () => {
           .map((ps) => ({
             skillName: ps.skills?.skill_name ?? "",
             reason: ps.skill_reason ?? "",
-          }));
+          }))
+          .slice(0, 4); // 최대 3개까지만 보여준다.
 
         return {
           id: row.id,
@@ -128,7 +140,11 @@ const ProjectSection = () => {
             className={styles.addProjectButton}
             onClick={handleAddProject}
           >
-            <img src="/icons/ic_plus.png" alt="" className={styles.addButtonIcon} />
+            <img
+              src="/icons/ic_plus.png"
+              alt=""
+              className={styles.addButtonIcon}
+            />
             <span>프로젝트 추가</span>
           </button>
         )}
