@@ -130,9 +130,9 @@ const ProjectFormPage = () => {
   const [newSkillCategory, setNewSkillCategory] = useState<string>("Frontend"); // 신규 추가 스킬 카테고리
   const [skillError, setSkillError] = useState(""); // 신규 스킬 추가 관련 에러 메시지
 
-  // useMemo hook - 메모이제이션을 사용
-  // availableSkills, selectedSkills, skillQuery 중 하나라도 변경되면 filteredSkillOptions을 재계산
-  // 이미 저장된 값을 재사용한다면, 연산 없이 그대로 사용
+  // useMemo hook - 메모이제이션을 사용하는 React Hook
+  // 이미 저장된 값을 재사용한다면, 연산 없이 그대로 사용 (Re-렌더링 시 유리)
+  // ex) 다크모드 전환, 부모 컴포넌트 or 전체 페이지 리렌더링이 발생할 때, 기존에 검색된 리스트를 유지.
   const filteredSkillOptions = useMemo(() => {
     // 이미 프로젝트에 사용 중인 스킬들은 검색 결과에서 제외하기 위해, selectedSkills에서 스킬 이름만 추출하여 Set으로 관리
     const selectedNameSet = new Set(
@@ -143,7 +143,6 @@ const ProjectFormPage = () => {
 
     return availableSkills.filter((skill) => {
       const isAlreadySelected = selectedNameSet.has(
-        // 이미 프로젝트에 추가된 스킬인지 확인
         normalize(skill.skill_name),
       );
 
@@ -247,7 +246,7 @@ const ProjectFormPage = () => {
     };
 
     void fetchProject();
-  }, [isEditMode, passedProject, slug, reset]);
+  }, []);
   // React는 현재 페이지를 재사용한다. 따라서, 이전에 프로젝트 수정 작업을 하다가, 추가 작업을 할 수도 있고
   // 반대로 추가 작업을 하다가, 수정 작업을 할 수도 있다.
   // 그리고 다른 프로젝트를 수정하게 되면, passedProject, slug 값이 변경되기도한다.
@@ -396,7 +395,7 @@ const ProjectFormPage = () => {
         .map((skill) => ({
           skill_name: skill.skillName,
           category_name: skill.categoryName,
-        })); // project_skills 테이블의 row 형식으로 매핑
+        })); // skills 테이블의 row 형식으로 매핑
 
       if (newSkillsPayload.length > 0) {
         const { error: insertSkillError } = await supabase
@@ -408,12 +407,12 @@ const ProjectFormPage = () => {
         }
       }
 
-      // 추가, 수정 시 최종 선택된 스킬들 정보
+      // 프로젝트에 등록하는 스킬들의 이름만 배열로 만듦
       const requiredSkillNames = Array.from(
         new Set(selectedSkills.map((skill) => skill.skillName)),
       );
 
-      let allSkillRows: Skill[] = [];
+      let selectedSkillRows: Skill[] = [];
 
       if (requiredSkillNames.length > 0) {
         const { data: skillsData, error: skillsError } = await supabase
@@ -422,12 +421,12 @@ const ProjectFormPage = () => {
           .in("skill_name", requiredSkillNames);
 
         if (skillsError) throw skillsError;
-        allSkillRows = (skillsData as Skill[]) ?? []; // 프로젝트에 연결된 모든 스킬 이름에 대한 DB의 스킬 정보 Skills(id, skill_name, category_name)
+        selectedSkillRows = (skillsData as Skill[]) ?? []; // 프로젝트에 연결된 모든 스킬 이름에 대한 DB의 스킬 정보 Skills(id, skill_name, category_name)
       }
 
       // 선택된 스킬 이름으로 스킬 ID를 모두 가져와서 [스킬이름 - 스킬ID] 매핑 정보 생성
       const skillIdByName = new Map<string, number>();
-      allSkillRows.forEach((skill) => {
+      selectedSkillRows.forEach((skill) => {
         skillIdByName.set(normalize(skill.skill_name), skill.id);
       });
 
@@ -437,7 +436,7 @@ const ProjectFormPage = () => {
         .delete()
         .eq("project_id", savedProjectId);
 
-      const relationRows = selectedSkills
+      const projectSkillRows = selectedSkills
         .map((skill) => {
           const resolvedSkillId = skillIdByName.get(normalize(skill.skillName));
           if (!resolvedSkillId) return null;
@@ -460,24 +459,26 @@ const ProjectFormPage = () => {
         ); // null이 아닌 값만 남기도록 필터링
 
       // 3. project_skills 테이블에 새로 생성된 row들을 일괄 삽입
-      if (relationRows.length > 0) {
+      if (projectSkillRows.length > 0) {
         const { error: relationError } = await supabase
           .from("project_skills")
-          .insert(relationRows);
+          .insert(projectSkillRows);
         if (relationError) throw relationError;
       }
 
       // 수정 완료 후, 수정된, 또는 새로 추가된 프로젝트 데이터 세팅
-      const nextProject = toProjectState(savedProject);
-      nextProject.tags = selectedSkills.map((skill) => skill.skillName);
-      nextProject.skillReasons = selectedSkills
+      const savedProjectState = toProjectState(savedProject);
+      savedProjectState.tags = selectedSkills.map((skill) => skill.skillName);
+      savedProjectState.skillReasons = selectedSkills
         .filter((skill) => skill.reason.trim().length > 0)
         .map((skill) => ({
           skillName: skill.skillName,
           reason: skill.reason,
         }));
 
-      navigate(`/projects/${nextProject.slug}`, { state: nextProject }); // 프로젝트 상세 페이지로 이동하면서, 수정된 프로젝트 데이터도 함께 전달
+      navigate(`/projects/${savedProjectState.slug}`, {
+        state: savedProjectState,
+      }); // 프로젝트 상세 페이지로 이동하면서, 수정된 프로젝트 데이터도 함께 전달
     } catch (error: any) {
       if (error?.code === "23505") {
         setErrorMessage("이미 사용 중인 slug입니다. 다른 slug를 입력해주세요.");
