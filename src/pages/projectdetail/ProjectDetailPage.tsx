@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useMemo } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styles from "./ProjectDetailPage.module.css";
 import type { Project } from "../../type/project";
 import ReactMarkdown from "react-markdown";
@@ -10,30 +10,100 @@ import { supabase } from "../../api/supabaseClient";
 import rehypeRaw from "rehype-raw";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { darcula } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+
+type ProjectSkillRow = {
+  skill_reason: string | null;
+  skills: { skill_name: string } | null;
+};
+
+const toProject = (row: any): Project => ({
+  id: row.id,
+  slug: row.slug,
+  title: row.title,
+  role: row.role ?? "",
+  duration: row.duration ?? "",
+  contribution: row.contribution ?? "",
+  readmeMd: row.readme_md ?? "",
+  description: row.overview ?? "",
+  category: row.category_name,
+  image: row.img_url ?? "",
+  githubUrl: row.github_url ?? "",
+  tags: ((row.project_skills as ProjectSkillRow[] | undefined) ?? [])
+    .map((item) => item.skills?.skill_name)
+    .filter((value): value is string => Boolean(value)),
+  skillReasons: ((row.project_skills as ProjectSkillRow[] | undefined) ?? [])
+    .filter((item) => item.skills?.skill_name && item.skill_reason?.trim())
+    .map((item) => ({
+      skillName: item.skills?.skill_name ?? "",
+      reason: item.skill_reason ?? "",
+    })),
+});
+
+const fetchProjectBySlug = async (slug: string): Promise<Project> => {
+  const { data, error } = await supabase
+    .from("projects")
+    .select(
+      `
+      id,
+      slug,
+      title,
+      role,
+      duration,
+      contribution,
+      readme_md,
+      overview,
+      category_name,
+      img_url,
+      github_url,
+      project_skills (
+        skill_reason,
+        skills (
+          skill_name
+        )
+      )
+    `,
+    )
+    .eq("slug", slug)
+    .single();
+
+  if (error) throw error;
+  if (!data) throw new Error("프로젝트를 찾을 수 없습니다.");
+
+  return toProject(data);
+};
 
 const ProjectDetailPage = () => {
-  const location = useLocation();
   const navigate = useNavigate();
+  const { slug } = useParams();
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
-  const [isDeleting, setIsDeleting] = useState(false); // 삭제 중 상태
+  const location = useLocation();
+  const queryClient = useQueryClient();
+
   const state = location.state as Project | { project: Project } | null;
-  const project = state && "project" in state ? state.project : state;
+  const projectFromState = state && "project" in state ? state.project : state;
 
-  // 수정 핸들러
-  const handleEdit = () => {
-    navigate(`/projects/${project?.slug}/edit`, { state: project });
-  };
+  const {
+    data: projectBySlug,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["project", slug],
+    enabled: Boolean(!projectFromState && slug),
+    queryFn: () => fetchProjectBySlug(slug as string),
+  });
 
-  // 삭제 핸들러
-  const handleDelete = async () => {
-    if (!project || isDeleting) return;
-    const confirmed = window.confirm("이 프로젝트를 삭제할까요?");
-    if (!confirmed) return;
+  const project = useMemo(
+    () => projectFromState ?? projectBySlug,
+    [projectFromState, projectBySlug],
+  );
 
-    setIsDeleting(true);
+  const deleteProjectMutation = useMutation({
+    mutationFn: async () => {
+      if (!project) {
+        throw new Error("프로젝트가 없습니다.");
+      }
 
-    try {
-      // 1. 프로젝트와 연결된 project_skills 레코드 삭제
       const { error: skillsDeleteError } = await supabase
         .from("project_skills")
         .delete()
@@ -41,24 +111,46 @@ const ProjectDetailPage = () => {
 
       if (skillsDeleteError) throw skillsDeleteError;
 
-      // 2. 프로젝트 삭제
       const { error: projectDeleteError } = await supabase
         .from("projects")
         .delete()
         .eq("id", project.id);
 
       if (projectDeleteError) throw projectDeleteError;
+    },
+    onSuccess: async () => {
+      if (slug) {
+        await queryClient.invalidateQueries({ queryKey: ["project", slug] });
+      }
 
-      navigate("/#project"); // 삭제 후 목록으로 이동
-    } catch (err) {
-      console.error(err);
+      navigate("/#project");
+    },
+    onError: () => {
       window.alert("프로젝트 삭제에 실패했습니다.");
-    } finally {
-      setIsDeleting(false);
-    }
+    },
+  });
+
+  const handleEdit = () => {
+    navigate(`/projects/${project?.slug}/edit`, { state: project });
   };
 
-  if (!project) {
+  const handleDelete = async () => {
+    if (!project || deleteProjectMutation.isPending) return;
+    const confirmed = window.confirm("이 프로젝트를 삭제할까요?");
+    if (!confirmed) return;
+
+    deleteProjectMutation.mutate();
+  };
+
+  if (isLoading) {
+    return (
+      <div className={styles.errorContainer}>
+        <h1>프로젝트 정보를 불러오는 중입니다.</h1>
+      </div>
+    );
+  }
+
+  if (!project || isError) {
     return (
       <div className={styles.errorContainer}>
         <h1>프로젝트를 찾을 수 없습니다.</h1>
@@ -78,7 +170,6 @@ const ProjectDetailPage = () => {
             &lt; 목록 보기
           </button>
 
-          {/* // 로그인한 사용자에게만 수정/삭제 버튼을 보여준다. */}
           {isLoggedIn && (
             <div className={styles.adminActions}>
               <button
@@ -92,9 +183,9 @@ const ProjectDetailPage = () => {
                 type="button"
                 className={styles.deleteButton}
                 onClick={handleDelete}
-                disabled={isDeleting}
+                disabled={deleteProjectMutation.isPending}
               >
-                {isDeleting ? "삭제 중..." : "삭제"}
+                {deleteProjectMutation.isPending ? "삭제 중..." : "삭제"}
               </button>
             </div>
           )}
@@ -164,11 +255,9 @@ const ProjectDetailPage = () => {
             rehypePlugins={rehypeRaw as any}
             components={{
               code({ node, inline, className, children, ...props }: any) {
-                // className에 'language-java' 같은 값이 있는지 확인합니다.
                 const match = /language-(\w+)/.exec(className || "");
 
                 return !inline && match ? (
-                  // 언어 태그가 있는 코드 블록인 경우 하이라이터 적용
                   <SyntaxHighlighter
                     {...props}
                     style={darcula}
@@ -178,7 +267,6 @@ const ProjectDetailPage = () => {
                     {String(children).replace(/\n$/, "")}
                   </SyntaxHighlighter>
                 ) : (
-                  // 백틱(`) 하나로 감싼 인라인 코드인 경우 기본 스타일 적용
                   <code {...props} className={className}>
                     {children}
                   </code>
