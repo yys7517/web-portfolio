@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { MouseEvent } from "react";
 import {
   categoryFilters,
@@ -13,7 +13,30 @@ import { projectData } from "./projectData";
 
 const ProjectSection = () => {
   const navigate = useNavigate();
-  const projects = projectData;
+  const sortedProjects = useMemo(() => {
+    const parseDurationDate = (duration: string): number => {
+      const startText = (duration || "").split("~")[0].trim();
+
+      const normalized = startText
+        .replace(/\s/g, "")
+        .replace(/[^0-9./-]/g, "")
+        .replace(/\./g, "-");
+
+      const [year, month, day] = normalized.split("-").map(Number);
+
+      if (!year) return 0;
+      const validMonth = Number.isNaN(month) ? 1 : month;
+      const validDay = Number.isNaN(day) ? 1 : day;
+
+      return new Date(year, validMonth - 1, validDay).getTime();
+    };
+
+    return [...projectData].sort(
+      (a, b) => parseDurationDate(b.duration) - parseDurationDate(a.duration),
+    );
+  }, []);
+
+  const projects = sortedProjects;
   const [filteredProjects, setFilteredProjects] = useState(projects);
   const [selectedCategory, setSelectedCategory] =
     useState<CategoryFilter>("All"); // 선택된 카테고리
