@@ -9,27 +9,41 @@ const skills = [
   {
     category: "Language",
     icon: langIcon,
-    items: [ "Kotlin", "Java", "TypeScript", "JavaScript"]
+    items: ["Kotlin", "Java", "TypeScript", "JavaScript"],
   },
   {
     category: "Frontend",
     icon: feIcon,
-    items: ["React","Redux", "React-Query", "React-Hook-Form", "Vite", "CSS Modules"],
+    items: [
+      "React",
+      "Redux",
+      "React-Query",
+      "React-Hook-Form",
+      "Vite",
+      "CSS Modules",
+    ],
   },
   {
     category: "Backend",
     icon: beIcon,
-    items: ["Spring (Boot)", "Firebase", "Supabase"],
+    items: ["Spring (Boot)", "REST API", "Supabase"],
   },
   {
     category: "Mobile",
     icon: mobileIcon,
-    items: ["Android", "iOS", "Jetpack Compose", "Hilt", "Clean Architecture"],
+    items: [
+      "Android",
+      "Jetpack Compose",
+      "Hilt",
+      "Firebase",
+      "FCM",
+      "Clean Architecture",
+    ],
   },
   {
     category: "DevOps",
     icon: devopsIcon,
-    items: ["Docker", "AWS(EC2)", "Redis", "Vercel"],
+    items: ["Docker", "AWS(EC2, S3)", "Redis", "Vercel"],
   },
 ];
 
@@ -37,9 +51,9 @@ const SkillSection = () => {
   return (
     <section id="skills" className={styles.skillSection}>
       <div className={styles.titleWrap}>
-          <h2 className={styles.title}>SKILLS</h2>
-          <div className={styles.titleLine} />
-        </div>
+        <h2 className={styles.title}>SKILLS</h2>
+        <div className={styles.titleLine} />
+      </div>
 
       <div className={styles.card}>
         {skills.map((group) => (

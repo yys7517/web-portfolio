@@ -142,6 +142,16 @@
   color: #fff;
 }
 
+.tag[data-skill="REST API"] {
+  background: #2457c5;
+  color: #fff;
+}
+
+.tag[data-skill="PostgreSQL"] {
+  background: #2f6ea7;
+  color: #fff;
+}
+
 .tag[data-skill="Firebase"] {
   background: #f6c52a;
   color: #111;
@@ -173,6 +183,11 @@
   color: #fff;
 }
 
+.tag[data-skill="FCM"] {
+  background: #ff7043;
+  color: #fff;
+}
+
 .tag[data-skill="Clean Architecture"] {
   background: #2f3b57;
   color: #fff;
@@ -184,8 +199,13 @@
   color: #fff;
 }
 
-.tag[data-skill="AWS(EC2)"] {
+.tag[data-skill="AWS(EC2, S3)"] {
   background: #f2a32a;
+  color: #fff;
+}
+
+.tag[data-skill="AWS(S3)"] {
+  background: #d9871f;
   color: #fff;
 }
 
