@@ -10,7 +10,7 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 100;
 }
 
 .headerNav {
@@ -38,19 +38,23 @@
   display: none;
 }
 
-.nav {
+.desktopNav {
   display: flex;
   gap: 24px;
   position: static;
   transform: none;
 }
 
-.nav ul {
+.desktopNav ul {
   display: flex;
   gap: 24px;
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.mobileNav {
+  display: none;
 }
 
 .link {
@@ -77,6 +81,17 @@
   appearance: none;
 }
 
+@keyframes navEnter {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (max-width: 1024px) {
   .header {
     padding: 14px 16px;
@@ -92,6 +107,10 @@
 
   .logoButton {
     font-size: 24px;
+  }
+
+  .desktopNav {
+    display: none;
   }
 
   .menuButton {
@@ -116,7 +135,8 @@
     background: #f3f5ef;
   }
 
-  .nav {
+  .mobileNav {
+    display: block;
     position: fixed;
     top: 72px;
     left: 0;
@@ -128,20 +148,18 @@
     visibility: hidden;
     transform: translateY(-10px);
     pointer-events: none;
-    transition:
-      opacity 0.2s ease,
-      transform 0.2s ease,
-      visibility 0.2s ease;
+    transition: none;
   }
 
-  .navOpen {
+  .mobileNavOpen {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
     pointer-events: auto;
+    animation: navEnter 0.2s ease;
   }
 
-  .nav ul {
+  .mobileNav ul {
     width: 100%;
     flex-direction: column;
     align-items: flex-start;
@@ -149,7 +167,7 @@
     padding: 22px 18px 24px;
   }
 
-  .nav li {
+  .mobileNav li {
     width: 100%;
   }
 
