@@ -102,12 +102,14 @@ const ProjectDetailPage = () => {
 
         <section className={styles.titleRow}>
           <h1>{project.title}</h1>
-          <div className={styles.titleActions}>
-            <a href={project.githubUrl} target="_blank" rel="noreferrer">
-              <img src="/icons/ic_github.svg"></img>
-              <span>Github</span>
-            </a>
-          </div>
+          {project.githubUrl && (
+            <div className={styles.titleActions}>
+              <a href={project.githubUrl} target="_blank" rel="noreferrer">
+                <img src="/icons/ic_github.svg"></img>
+                <span>Github</span>
+              </a>
+            </div>
+          )}
         </section>
 
         <section className={styles.topSection}>

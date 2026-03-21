@@ -2,103 +2,23 @@ import { useEffect, useState } from "react";
 import type { MouseEvent } from "react";
 import {
   categoryFilters,
-  type Category,
   type CategoryFilter,
 } from "../../type/category";
 import styles from "./ProjectSection.module.css";
-import { supabase } from "../../api/supabaseClient";
 import { useNavigate } from "react-router-dom";
 import type { Project } from "../../type/project";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store/store";
-
-type ProjectSkillRow = {
-  skill_reason: string | null;
-  skills: { skill_name: string } | null;
-};
+import { projectData } from "./projectData";
 
 const ProjectSection = () => {
   const navigate = useNavigate();
-  const [projects, setProjects] = useState<Project[]>([]);
+  const projects = projectData;
+  const [filteredProjects, setFilteredProjects] = useState(projects);
   const [selectedCategory, setSelectedCategory] =
     useState<CategoryFilter>("All"); // 선택된 카테고리
-  const [filteredProjects, setFilteredProjects] = useState(projects); // 선택된 카테고리에 해당하는 프로젝트로 필터링
 
   const isLoggedin = useSelector((state: RootState) => state.auth.isLoggedIn);
-
-  // 최초 Supabase 프로젝트 init 함수
-  useEffect(() => {
-    const fetchProjects = async () => {
-      const { data, error } = await supabase
-        .from("projects")
-        .select(
-          `
-        id,
-        slug,
-        title,
-        role,
-        duration,
-        contribution,
-        readme_md,
-        overview,
-        category_name,
-        img_url,
-        github_url,
-        project_skills (
-          skill_reason,
-          skills (
-            skill_name
-          )
-        )
-      `,
-        )
-        .order("duration", { ascending: false });
-
-      // FK에 연결된 project_id 값을 통해 project_skills를 자동으로 조인 + skill_id의 값을 통해
-      // project_skills, skills 테이블을 조인
-      // skill_reason, skill_name을 가져옴.
-      if (error) return;
-
-      const mapped: Project[] = (data ?? []).map((row: any) => {
-        const projectSkills =
-          (row.project_skills as ProjectSkillRow[] | undefined) ?? [];
-        const tags = projectSkills
-          .map((ps) => ps.skills?.skill_name)
-          .filter((name): name is string => Boolean(name));
-
-        /** 이유까지 작성한 기술들만 가져온다. */
-        const skillReasons = projectSkills
-          .filter((ps) => ps.skills?.skill_name && ps.skill_reason?.trim())
-          .map((ps) => ({
-            skillName: ps.skills?.skill_name ?? "",
-            reason: ps.skill_reason ?? "",
-          }))
-          .slice(0, 4); // 최대 3개까지만 보여준다.
-
-        return {
-          id: row.id,
-          slug: row.slug,
-          title: row.title,
-          role: row.role ?? "",
-          duration: row.duration ?? "",
-          contribution: row.contribution ?? "",
-          readmeMd: row.readme_md ?? "",
-          description: row.overview ?? "",
-          category: row.category_name as Category,
-          image: row.img_url ?? "",
-          demoUrl: row.demo_url ?? "",
-          githubUrl: row.github_url ?? "",
-          tags,
-          skillReasons,
-        };
-      });
-
-      setProjects(mapped);
-      setFilteredProjects(mapped);
-    };
-
-    fetchProjects();
-  }, []);
 
   // 카테고리 변경에 따른, 프로젝트 필터링 useEffect 함수
   useEffect(() => {

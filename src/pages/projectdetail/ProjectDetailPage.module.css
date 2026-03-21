@@ -222,33 +222,33 @@
 }
 
 .markdownSection h1 {
-  margin: 0 0 14px;
+  margin: 0 0 10px;
   color: #111;
-  font-size: 42px;
+  font-size: 30px;
   font-weight: 800;
   line-height: 1.25;
 }
 
 .markdownSection h2 {
-  margin: 26px 0 12px;
+  margin: 22px 0 10px;
   color: #111;
-  font-size: 34px;
+  font-size: 24px;
   font-weight: 800;
   line-height: 1.3;
 }
 
 .markdownSection h3 {
-  margin: 22px 0 10px;
+  margin: 18px 0 10px;
   color: #111;
-  font-size: 28px;
+  font-size: 21px;
   font-weight: 700;
   line-height: 1.35;
 }
 
 .markdownSection h4 {
-  margin: 18px 0 10px;
+  margin: 16px 0 8px;
   color: #111;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 700;
   line-height: 1.4;
 }
@@ -257,21 +257,22 @@
 .markdownSection li,
 .markdownSection blockquote {
   color: #252525;
-  font-size: 20px;
-  line-height: 1.6;
+  font-size: 17px;
+  line-height: 1.7;
   word-break: keep-all;
+  margin: 0 0 12px;
 }
 
 .markdownSection ul {
   list-style: disc;
   padding-left: 28px;
-  margin: 12px 0;
+  margin: 10px 0 14px;
 }
 
 .markdownSection ol {
   list-style: decimal;
   padding-left: 28px;
-  margin: 12px 0;
+  margin: 10px 0 14px;
 }
 
 .markdownSection a {
@@ -423,5 +424,21 @@
   .markdownSection li,
   .markdownSection blockquote {
     font-size: 16px;
+  }
+
+  .markdownSection h1 {
+    font-size: 26px;
+  }
+
+  .markdownSection h2 {
+    font-size: 22px;
+  }
+
+  .markdownSection h3 {
+    font-size: 19px;
+  }
+
+  .markdownSection h4 {
+    font-size: 17px;
   }
 }
