@@ -129,6 +129,11 @@ export const projectData: Project[] = [
 
 <br />
 
+
+## 패키지 구조
+
+![프로젝트 패키지 구조](https://github.com/user-attachments/assets/063983d9-d9be-468e-9875-1e4a6347e031)
+
 ## 🛠 Tech Stack
 <img width="800" height="600" alt="image" src="https://github.com/user-attachments/assets/583b12b4-bd98-4f74-b6f7-c63af6ef1e54" />
 
@@ -173,11 +178,7 @@ export const projectData: Project[] = [
 **해결**: JPQL JOIN FETCH를 적용하여 단 한 번의 쿼리로 연관 객체까지 일괄 조회
 
 ### 5. Vibe Coding 전략 (With. Codex)
-<br />
-
-
-![image](https://github.com/user-attachments/assets/c1ea9e80-cf2b-4d65-9b5b-2cacd51d4cc3)
-
+<img width="533" height="481" alt="image" src="https://github.com/user-attachments/assets/b554fc74-0d1b-4a56-9312-46f32c04e1be" />
 
 \`\`\`
 # 에이전트 작업 규칙
