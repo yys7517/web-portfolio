@@ -49,10 +49,7 @@ export const projectData: Project[] = [
 - 상세 페이지 진입 지점에서 state 존재 여부를 먼저 확인
 - state가 없을 때는 slug 기반으로 supabase DB에서 다시 조회하는 fallback 조회 흐름을 추가
 - 조회 실패 시 사용자에게 명확한 안내 메시지와 목록으로 돌아가기 버튼 제공
-
-## 배포 URL
-
-[YYS's Portfolio](https://youngsun-portfolio.vercel.app/)`,
+`,
     description:
       "현대오토에버 모빌리티 SW스쿨 웹/앱 반에서 학습하여 익힌 프론트엔드 기술을 통해 나만의 웹 포트폴리오 사이트를 제작하였습니다.",
     category: "Frontend",
@@ -131,24 +128,24 @@ export const projectData: Project[] = [
 
 
 ## 패키지 구조
-
-![프로젝트 패키지 구조](https://github.com/user-attachments/assets/063983d9-d9be-468e-9875-1e4a6347e031)
+<img width="800" height="600" alt="image" src="https://github.com/user-attachments/assets/063983d9-d9be-468e-9875-1e4a6347e031" />
 
 ## 🛠 Tech Stack
-<img width="800" height="600" alt="image" src="https://github.com/user-attachments/assets/583b12b4-bd98-4f74-b6f7-c63af6ef1e54" />
+![Skill Stack](https://github.com/user-attachments/assets/583b12b4-bd98-4f74-b6f7-c63af6ef1e54)
 
 * **Core**: Java Spring Boot
 * **Security**: Spring Security (Session & CSRF)
 * **Database**: PostgreSQL, Spring Data JPA/Hibernate
 * **Caching**: Redis
 
-### Infrastructure & DevOps
+## Infrastructure & DevOps
 * **Storage**: Amazon S3
 * **CI/CD, Deployment**: GitHub Actions, Docker, Vercel
 * **Proxy** : Nginx
 * **Server** : AWS EC2
 
-### Architecture
+## Architecture
+
 <img width="1324" height="730" alt="image" src="https://github.com/user-attachments/assets/9abc4efc-ddc4-41f8-9c75-f8ca2f65a9ee" />
 
 <br />
@@ -178,7 +175,7 @@ export const projectData: Project[] = [
 **해결**: JPQL JOIN FETCH를 적용하여 단 한 번의 쿼리로 연관 객체까지 일괄 조회
 
 ### 5. Vibe Coding 전략 (With. Codex)
-<img width="533" height="481" alt="image" src="https://github.com/user-attachments/assets/b554fc74-0d1b-4a56-9312-46f32c04e1be" />
+![](https://github.com/user-attachments/assets/b554fc74-0d1b-4a56-9312-46f32c04e1be)
 
 \`\`\`
 # 에이전트 작업 규칙
@@ -199,7 +196,7 @@ export const projectData: Project[] = [
   - \`agent/security_config/plan_security_config.md\`
 \`\`\`
 
-위와 같이 구조화된 에이전트 작업 규칙 (AGENT.md)을 작성하고, 프로젝트를 진행하였습니다.
+**위와 같이 구조화된 에이전트 작업 규칙 (AGENT.md)을 작성하고, 프로젝트를 진행하였습니다.**
 - 문서 기반 관리: 모든 작업은 agent/<주제명>/ 하위에 research 및 plan 문서로 명문화하여 관리하였습니다. research 문서는 기존 코드베이스를 분석하여 작성하게끔 하였고, 앞으로 할 작업내용에 대한 plan 문서를 작성하게 하였습니다.
 - 지속적 업데이트: 신규 생성보다 기존 문서를 갱신하여 맥락의 연속성을 유지합니다.
 - 정확도 향상 및 지연 감소
@@ -214,8 +211,6 @@ export const projectData: Project[] = [
 ## 발표 자료
 [Canva](https://www.canva.com/design/DAHEKSCKbUA/o8SECI8vNXv_zIGzlzHQDw/edit?utm_content=DAHEKSCKbUA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
-<br />
-
 ## 시연영상
 [Demo](https://drive.google.com/file/d/1XNfFHuV3prxDul5s8yuP_z-fmJ1zi8cw/view)
 
@@ -224,9 +219,7 @@ export const projectData: Project[] = [
 ## 👥 Contributors (현대오토에버 SW 스쿨 3기 1조)
 * [**김준성 (Backend)**](https://github.com/jsktt)
 * [**윤영선 (Backend)**](https://github.com/yys7517)
-<br />
-
-Copyright © 2026 Team PINT. All rights reserved.`,
+<br />`,
     description:
       "현대오토에버 SW스쿨에서 2차 프로젝트로, 웹/앱 팀 프로젝트를 진행하였습니다. Pint는 사진 및 필터 정보 공유 플랫폼을 백엔드 중심으로 개발한 프로젝트입니다.",
     category: "Backend",
@@ -250,7 +243,7 @@ Copyright © 2026 Team PINT. All rights reserved.`,
       {
         skillName: "Spring Boot",
         reason:
-          "Controller-Service-Repository 레이어드 아키텍처를 적용하여 계층 분리를 통해 엔드포인트, 비즈니스 로직, 영속성 코드를 분리해 유지보수성을 확보했습니다.",
+          "Controller-Service-Repository 레이어드 아키텍처를 적용하여 계층 분리를 통해 코드를 분리해 유지보수성을 확보했습니다.",
       },
       {
         skillName: "Spring Security",

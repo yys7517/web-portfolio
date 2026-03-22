@@ -115,7 +115,7 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(220px, 1fr));
   gap: 20px 200px;
-  font-size: 16px;
+  font-size: 20px;
 }
 
 .metaGrid p {
@@ -130,6 +130,17 @@
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+.metaGrid p a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.metaGrid p a:hover,
+.metaGrid p a:focus-visible {
+  color: #dce4ff;
+  text-decoration: none;
 }
 
 .metaIcon {
